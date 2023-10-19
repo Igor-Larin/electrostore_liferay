@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="electrostore.db.model.Electronic">
+		<field name="electronic_id" type="long" />
+		<field name="name" type="String" />
+		<field name="price" type="int" />
+		<field name="electronic_count" type="int" />
+		<field name="is_present" type="boolean" />
+		<field name="is_archive" type="boolean" />
+		<field name="description" type="String" />
+		<field name="electrotype_id" type="long" />
+	</model>
+	<model name="electrostore.db.model.ElectronicType">
+		<field name="electrotype_id" type="long" />
+		<field name="name" type="String" />
+	</model>
+	<model name="electrostore.db.model.Electrotype_Employee">
+		<field name="emp_id" type="long" />
+		<field name="electro_id" type="long" />
+	</model>
+	<model name="electrostore.db.model.Employee">
+		<field name="employee_id" type="long" />
+		<field name="name" type="String" />
+		<field name="lastname" type="String" />
+		<field name="midname" type="String" />
+		<field name="birthdate" type="Date" />
+		<field name="sex" type="boolean" />
+		<field name="position_id" type="long" />
+	</model>
+	<model name="electrostore.db.model.Position">
+		<field name="position_id" type="long" />
+		<field name="name" type="String" />
+	</model>
+	<model name="electrostore.db.model.Purchase">
+		<field name="purchase_id" type="long" />
+		<field name="purchase_date" type="Date" />
+		<field name="electronic_id" type="long" />
+		<field name="purchasetype_id" type="long" />
+		<field name="employee_id" type="long" />
+	</model>
+	<model name="electrostore.db.model.PurchaseType">
+		<field name="purchasetype_id" type="long" />
+		<field name="name" type="String" />
+	</model>
+</model-hints>

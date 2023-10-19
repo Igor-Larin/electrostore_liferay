@@ -1,0 +1,12 @@
+Bundle-Name: db-api
+Bundle-SymbolicName: electrostore.db.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	electrostore.db.exception,\
+	electrostore.db.model,\
+	electrostore.db.service,\
+	electrostore.db.service.persistence
+-check: EXPORTS
+-consumer-policy: ${replacestring;${range;[==,==]};.*,(.*)];$1}
+-includeresource: META-INF/service.xml=../db-service/service.xml
+-provider-policy: ${replacestring;${range;[==,==]};.*,(.*)];$1}

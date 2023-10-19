@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="electrostore.db.model.Electronic" />
+	<import class="electrostore.db.model.ElectronicType" />
+	<import class="electrostore.db.model.Electrotype_Employee" />
+	<import class="electrostore.db.model.Employee" />
+	<import class="electrostore.db.model.Position" />
+	<import class="electrostore.db.model.Purchase" />
+	<import class="electrostore.db.model.PurchaseType" />
+	<class name="electrostore.db.model.impl.ElectronicImpl" table="electronics">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="electronic_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="price" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="electronic_count" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="is_present" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="is_archive" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="electrotype_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="electrostore.db.model.impl.ElectronicTypeImpl" table="electrotype">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="electrotype_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="electrostore.db.model.impl.Electrotype_EmployeeImpl" table="electrotype_employee">
+		<composite-id class="electrostore.db.service.persistence.Electrotype_EmployeePK" name="primaryKey">
+			<key-property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="emp_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="electro_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+	</class>
+	<class name="electrostore.db.model.impl.EmployeeImpl" table="employees">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="employee_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="lastname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="midname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="birthdate" type="org.hibernate.type.TimestampType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="sex" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="position_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="electrostore.db.model.impl.PositionImpl" table="positiontype">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" column="id" name="position_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="electrostore.db.model.impl.PurchaseImpl" table="purchases">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="purchase_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="purchase_date" type="org.hibernate.type.TimestampType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="electronic_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="purchasetype_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="employee_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="electrostore.db.model.impl.PurchaseTypeImpl" table="purchasetype">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="purchasetype_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>
