@@ -14,11 +14,14 @@
 
 package electrostore.db.service.impl;
 
-import com.liferay.portal.aop.AopService;
-
-import electrostore.db.service.base.PositionLocalServiceBaseImpl;
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
+
+import com.liferay.portal.aop.AopService;
+
+import electrostore.db.model.Position;
+import electrostore.db.service.base.PositionLocalServiceBaseImpl;
 
 /**
  * @author Brian Wing Shun Chan
@@ -28,4 +31,7 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class PositionLocalServiceImpl extends PositionLocalServiceBaseImpl {
+	public List<Position> getAllPositions() {
+		return positionPersistence.findAll();
+	}
 }

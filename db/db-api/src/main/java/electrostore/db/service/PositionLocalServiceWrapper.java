@@ -220,6 +220,11 @@ public class PositionLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<electrostore.db.model.Position> getAllPositions() {
+		return _positionLocalService.getAllPositions();
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 

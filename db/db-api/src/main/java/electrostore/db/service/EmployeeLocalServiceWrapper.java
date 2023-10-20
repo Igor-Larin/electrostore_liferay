@@ -299,6 +299,13 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+	@Override
+	public void updateEmployee(javax.portlet.ActionRequest request)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_employeeLocalService.updateEmployee(request);
+	}
+
 	/**
 	 * Updates the employee in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *

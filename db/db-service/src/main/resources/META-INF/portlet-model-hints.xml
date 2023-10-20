@@ -1,6 +1,66 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="test.db.model.Electronic">
+		<field name="electronic_id" type="long" />
+		<field name="name" type="String">
+			<hint name="max-length">150</hint>
+		</field>
+		<field name="price" type="int" />
+		<field name="electronic_count" type="int" />
+		<field name="is_present" type="boolean" />
+		<field name="is_archive" type="boolean" />
+		<field name="description" type="String">
+			<hint name="max-length">5000</hint>
+			<hint name="display-height">150</hint>
+		</field>
+		<field name="electrotype_id" type="long" />
+	</model>
+	<model name="test.db.model.ElectronicType">
+		<field name="electrotype_id" type="long" />
+		<field name="name" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+	</model>
+	<model name="test.db.model.Employee">
+		<field name="employee_id" type="long" />
+		<field name="name" type="String">
+			<hint name="default-value">Name</hint>
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="lastname" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="midname" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="birthdate" type="Date">
+			<hint name="year-range-future">false</hint>
+		</field>
+		<field name="sex" type="boolean" />
+		<field name="position_id" type="long" />
+	</model>
+	<model name="test.db.model.Position">
+		<field name="position_id" type="long" />
+		<field name="name" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+	</model>
+	<model name="test.db.model.Purchase">
+		<field name="purchase_id" type="long" />
+		<field name="purchase_date" type="Date">
+			<hint name="year-range-future">false</hint>
+		</field>
+		<field name="electronic_id" type="long" />
+		<field name="purchasetype_id" type="long" />
+		<field name="employee_id" type="long" />
+	</model>
+	<model name="test.db.model.PurchaseType">
+		<field name="purchasetype_id" type="long" />
+		<field name="name" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+	</model>
 	<model name="electrostore.db.model.Electronic">
 		<field name="electronic_id" type="long" />
 		<field name="name" type="String" />
