@@ -44,6 +44,9 @@ public class ElectronicLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>electrostore.db.service.impl.ElectronicLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static void addElectronic(javax.portlet.ActionRequest request) {
+		getService().addElectronic(request);
+	}
 
 	/**
 	 * Adds the electronic to the database. Also notifies the appropriate model listeners.
@@ -273,6 +276,12 @@ public class ElectronicLocalServiceUtil {
 		throws PortalException {
 
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static void updateElectronic(javax.portlet.ActionRequest request)
+		throws PortalException {
+
+		getService().updateElectronic(request);
 	}
 
 	/**

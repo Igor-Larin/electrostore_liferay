@@ -11,28 +11,30 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import electrostore.db.service.EmployeeLocalService;
+import electrostore.db.service.ElectronicLocalService;
 import web.main.constants.WebMainPortletKeys;
 
 @Component(
-	immediate = true,
-	property = {
-			"javax.portlet.name=" + WebMainPortletKeys.WEBMAIN,
-			"mvc.command.name=updateEmployee"
-	},
-	service = MVCActionCommand.class
-)
-public class UpdateEmployeeMVCActionCommand implements MVCActionCommand {
+		immediate = true,
+		property = {
+				"javax.portlet.name=" + WebMainPortletKeys.WEBMAIN,
+				"mvc.command.name=updateElectronic"
+		},
+		service=MVCActionCommand.class
+	)
+public class UpdateElectronicMVCActionCommand implements MVCActionCommand {
+
 	@Reference
-	private EmployeeLocalService employeeLocalService;
+	private ElectronicLocalService electronicLocalService;
+	
 	@Override
 	public boolean processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws PortletException {
 		try {
-			System.out.println(ParamUtil.getLong(actionRequest, "employeeId"));
-			employeeLocalService.updateEmployee(actionRequest);			
-			actionResponse.getRenderParameters().setValue("mvcPath", "/employees/employees.jsp");	
+			electronicLocalService.updateElectronic(actionRequest);			
+			actionResponse.getRenderParameters().setValue("mvcPath", "/electronics/electronics.jsp");	
 		}
-		catch(PortalException exception) {
+		catch(Exception exception) {
+			System.out.println("in update electronic " + exception.getMessage());
 			return true;
 		}
 		return false;

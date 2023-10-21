@@ -32,6 +32,11 @@ public class ElectronicLocalServiceWrapper
 		_electronicLocalService = electronicLocalService;
 	}
 
+	@Override
+	public void addElectronic(javax.portlet.ActionRequest request) {
+		_electronicLocalService.addElectronic(request);
+	}
+
 	/**
 	 * Adds the electronic to the database. Also notifies the appropriate model listeners.
 	 *
@@ -299,6 +304,13 @@ public class ElectronicLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _electronicLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public void updateElectronic(javax.portlet.ActionRequest request)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_electronicLocalService.updateElectronic(request);
 	}
 
 	/**

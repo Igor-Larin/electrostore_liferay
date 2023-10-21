@@ -7,12 +7,15 @@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
+<%@page import="com.liferay.portal.kernel.dao.orm.QueryUtil"%>
 <%@page import="electrostore.db.model.Employee" %>
 <%@page import="electrostore.db.model.Position"%>
 <%@page import="electrostore.db.model.Electronic"%>
+<%@page import="electrostore.db.model.ElectronicType"%>
 <%@page import="electrostore.db.service.ElectronicLocalServiceUtil"%>
 <%@page import="electrostore.db.service.PositionLocalServiceUtil"%>
 <%@page import="electrostore.db.service.EmployeeLocalServiceUtil" %>
+<%@page import="electrostore.db.service.ElectronicTypeLocalServiceUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>

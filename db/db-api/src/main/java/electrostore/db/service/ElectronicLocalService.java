@@ -36,6 +36,8 @@ import java.io.Serializable;
 
 import java.util.List;
 
+import javax.portlet.ActionRequest;
+
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
@@ -61,6 +63,7 @@ public interface ElectronicLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>electrostore.db.service.impl.ElectronicLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the electronic local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link ElectronicLocalServiceUtil} if injection and service tracking are not available.
 	 */
+	public void addElectronic(ActionRequest request);
 
 	/**
 	 * Adds the electronic to the database. Also notifies the appropriate model listeners.
@@ -248,6 +251,8 @@ public interface ElectronicLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
+
+	public void updateElectronic(ActionRequest request) throws PortalException;
 
 	/**
 	 * Updates the electronic in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

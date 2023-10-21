@@ -15,6 +15,8 @@
 package electrostore.db.service.impl;
 
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.ParamUtil;
 
 import electrostore.db.model.Electronic;
 import electrostore.db.service.base.ElectronicLocalServiceBaseImpl;
@@ -22,6 +24,9 @@ import electrostore.db.service.base.ElectronicLocalServiceBaseImpl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -33,6 +38,33 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class ElectronicLocalServiceImpl extends ElectronicLocalServiceBaseImpl {
+	
+	public void addElectronic(ActionRequest request) {
+		long id = counterLocalService.increment();
+		Electronic electronic = electronicLocalService.createElectronic(id);
+		electronic.setName(ParamUtil.getString(request, "name"));
+		electronic.setDescription(ParamUtil.getString(request, "description"));
+		electronic.setPrice(ParamUtil.getInteger(request, "price"));
+		electronic.setElectronic_count(ParamUtil.getInteger(request, "count"));
+		electronic.setElectrotype_id(ParamUtil.getLong(request, "electrotype"));
+		electronic.setIs_archive(ParamUtil.getBoolean(request, "is_archive"));
+		electronic.setIs_present(ParamUtil.getBoolean(request, "is_present"));
+		electronicPersistence.update(electronic);
+	}
+	
+	public void updateElectronic(ActionRequest request) throws PortalException {
+		long id = ParamUtil.getLong(request, "electronicId");
+		Electronic electronic = electronicLocalService.getElectronic(id);
+		electronic.setName(ParamUtil.getString(request, "name"));
+		electronic.setDescription(ParamUtil.getString(request, "description"));
+		electronic.setPrice(ParamUtil.getInteger(request, "price"));
+		electronic.setElectronic_count(ParamUtil.getInteger(request, "count"));
+		electronic.setElectrotype_id(ParamUtil.getLong(request, "electrotype"));
+		electronic.setIs_archive(ParamUtil.getBoolean(request, "is_archive"));
+		electronic.setIs_present(ParamUtil.getBoolean(request, "is_present"));
+		electronicPersistence.update(electronic);
+	}
+	
 	public void addElectronicFromZip(String electronicString, String delimeter) {
 		long id, electrotype_id;
 		int price, count;
