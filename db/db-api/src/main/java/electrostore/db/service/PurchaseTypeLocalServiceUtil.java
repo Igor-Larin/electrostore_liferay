@@ -59,6 +59,12 @@ public class PurchaseTypeLocalServiceUtil {
 		return getService().addPurchaseType(purchaseType);
 	}
 
+	public static void addPurchaseTypeFromZip(
+		String purchaseTypeString, String delimeter) {
+
+		getService().addPurchaseTypeFromZip(purchaseTypeString, delimeter);
+	}
+
 	/**
 	 * @throws PortalException
 	 */

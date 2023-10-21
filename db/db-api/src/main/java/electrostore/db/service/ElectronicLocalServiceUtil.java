@@ -59,6 +59,12 @@ public class ElectronicLocalServiceUtil {
 		return getService().addElectronic(electronic);
 	}
 
+	public static void addElectronicFromZip(
+		String electronicString, String delimeter) {
+
+		getService().addElectronicFromZip(electronicString, delimeter);
+	}
+
 	/**
 	 * Creates a new electronic with the primary key. Does not add the electronic to the database.
 	 *

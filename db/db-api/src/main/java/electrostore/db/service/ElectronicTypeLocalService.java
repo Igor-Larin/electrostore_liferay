@@ -75,6 +75,9 @@ public interface ElectronicTypeLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public ElectronicType addElectronicType(ElectronicType electronicType);
 
+	public void addElectronicTypeFromZip(
+		String electroTypeString, String delimeter);
+
 	/**
 	 * Creates a new electronic type with the primary key. Does not add the electronic type to the database.
 	 *

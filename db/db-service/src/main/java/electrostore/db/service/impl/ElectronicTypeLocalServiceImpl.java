@@ -16,7 +16,10 @@ package electrostore.db.service.impl;
 
 import com.liferay.portal.aop.AopService;
 
+import electrostore.db.model.ElectronicType;
 import electrostore.db.service.base.ElectronicTypeLocalServiceBaseImpl;
+
+import java.util.Scanner;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -29,4 +32,25 @@ import org.osgi.service.component.annotations.Component;
 )
 public class ElectronicTypeLocalServiceImpl
 	extends ElectronicTypeLocalServiceBaseImpl {
+	
+	public void addElectronicTypeFromZip(String electroTypeString, String delimeter) {
+		long id;
+		String name;
+		try(Scanner scanner = new Scanner(electroTypeString)) {
+			scanner.useDelimiter(delimeter);
+			id = scanner.nextLong();
+			if(electronicTypePersistence.fetchByPrimaryKey(id) != null) {
+				System.out.println("Уже есть такой тип товара");
+				return;
+			}
+			name = scanner.next();
+		}
+		catch(Exception exception) {
+			System.out.println("Ошибка при чтении типа товара из файла");
+			return;
+		}		
+		ElectronicType electronicType = electronicTypePersistence.create(id);
+		electronicType.setName(name);
+		electronicTypePersistence.update(electronicType);
+	}
 }

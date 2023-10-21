@@ -16,7 +16,12 @@ package electrostore.db.service.impl;
 
 import com.liferay.portal.aop.AopService;
 
+import electrostore.db.model.Electronic;
 import electrostore.db.service.base.ElectronicLocalServiceBaseImpl;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -28,4 +33,38 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class ElectronicLocalServiceImpl extends ElectronicLocalServiceBaseImpl {
+	public void addElectronicFromZip(String electronicString, String delimeter) {
+		long id, electrotype_id;
+		int price, count;
+		String description, name;
+		boolean isPresent, isArchive;
+		try(Scanner scanner = new Scanner(electronicString)) {
+			scanner.useDelimiter(delimeter);
+			id = scanner.nextLong();
+			if(electronicPersistence.fetchByPrimaryKey(id) != null) {
+				System.out.println("Уже есть такой товар");
+				return;
+			}
+			name = scanner.next();
+			electrotype_id = scanner.nextLong();
+			price = scanner.nextInt();
+			count = scanner.nextInt();
+			isPresent = scanner.nextByte() == 1 ? true : false;
+			isArchive = scanner.nextByte() == 1 ? true : false;
+			description = scanner.next();
+		}
+		catch(Exception exception) {
+			System.out.println("Ошибка при чтении товара из файла");
+			return;
+		}		
+		Electronic electronic = electronicPersistence.create(id);
+		electronic.setName(name);
+		electronic.setElectrotype_id(electrotype_id);
+		electronic.setPrice(price);
+		electronic.setElectronic_count(count);
+		electronic.setIs_archive(isArchive);
+		electronic.setIs_present(isPresent);
+		electronic.setDescription(description);
+		electronicPersistence.update(electronic);
+	}
 }

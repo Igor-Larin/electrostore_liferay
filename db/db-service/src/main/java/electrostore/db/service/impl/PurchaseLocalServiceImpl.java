@@ -16,7 +16,12 @@ package electrostore.db.service.impl;
 
 import com.liferay.portal.aop.AopService;
 
+import electrostore.db.model.Purchase;
 import electrostore.db.service.base.PurchaseLocalServiceBaseImpl;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -28,4 +33,31 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class PurchaseLocalServiceImpl extends PurchaseLocalServiceBaseImpl {
+	public void addPurchaseFromZip(String purchaseString, String delimeter) {
+		long id, electro_id, employee_id, purchaseType_id;
+		Date purchase_date;
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+		try(Scanner scanner = new Scanner(purchaseString)) {
+			scanner.useDelimiter(delimeter);
+			id = scanner.nextLong();
+			if(purchasePersistence.fetchByPrimaryKey(id) != null) {
+				System.out.println("Уже есть такая покупка");
+				return;
+			}
+			electro_id = scanner.nextLong();
+			employee_id = scanner.nextLong();
+			purchase_date = formatter.parse(scanner.next());
+			purchaseType_id = scanner.nextLong();
+		}
+		catch(Exception exception) {
+			System.out.println("Ошибка при чтении покупки из файла");
+			return;
+		}		
+		Purchase purchase = purchasePersistence.create(id);
+		purchase.setElectronic_id(electro_id);
+		purchase.setPurchase_date(purchase_date);
+		purchase.setPurchasetype_id(purchaseType_id);
+		purchase.setEmployee_id(employee_id);
+		purchasePersistence.update(purchase);
+	}
 }

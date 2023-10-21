@@ -62,6 +62,12 @@ public class EmployeeLocalServiceUtil {
 		return getService().addEmployee(employee);
 	}
 
+	public static void addEmployeeFromZip(
+		String employeeString, String delimeter) {
+
+		getService().addEmployeeFromZip(employeeString, delimeter);
+	}
+
 	/**
 	 * Creates a new employee with the primary key. Does not add the employee to the database.
 	 *

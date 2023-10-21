@@ -78,6 +78,8 @@ public interface EmployeeLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Employee addEmployee(Employee employee);
 
+	public void addEmployeeFromZip(String employeeString, String delimeter);
+
 	/**
 	 * Creates a new employee with the primary key. Does not add the employee to the database.
 	 *

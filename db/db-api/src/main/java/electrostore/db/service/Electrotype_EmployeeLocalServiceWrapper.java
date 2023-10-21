@@ -51,6 +51,14 @@ public class Electrotype_EmployeeLocalServiceWrapper
 			electrotype_Employee);
 	}
 
+	@Override
+	public void addElectrotype_EmployeeFromZip(
+		String entityString, String delimeter) {
+
+		_electrotype_EmployeeLocalService.addElectrotype_EmployeeFromZip(
+			entityString, delimeter);
+	}
+
 	/**
 	 * Creates a new electrotype_ employee with the primary key. Does not add the electrotype_ employee to the database.
 	 *

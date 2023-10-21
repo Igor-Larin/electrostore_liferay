@@ -16,7 +16,12 @@ package electrostore.db.service.impl;
 
 import com.liferay.portal.aop.AopService;
 
+import electrostore.db.model.PurchaseType;
 import electrostore.db.service.base.PurchaseTypeLocalServiceBaseImpl;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -29,4 +34,24 @@ import org.osgi.service.component.annotations.Component;
 )
 public class PurchaseTypeLocalServiceImpl
 	extends PurchaseTypeLocalServiceBaseImpl {
+	public void addPurchaseTypeFromZip(String purchaseTypeString, String delimeter) {
+		long id;
+		String name;
+		try(Scanner scanner = new Scanner(purchaseTypeString)) {
+			scanner.useDelimiter(delimeter);
+			id = scanner.nextLong();
+			if(purchaseTypePersistence.fetchByPrimaryKey(id) != null) {
+				System.out.println("Уже есть такой тип покупки");
+				return;
+			}
+			name = scanner.next();
+		}
+		catch(Exception exception) {
+			System.out.println("Ошибка при чтении типа покупки из файла");
+			return;
+		}		
+		PurchaseType purchaseType = purchaseTypePersistence.create(id);
+		purchaseType.setName(name);
+		purchaseTypePersistence.update(purchaseType);
+	}
 }

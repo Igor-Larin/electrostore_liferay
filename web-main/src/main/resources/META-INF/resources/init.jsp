@@ -9,6 +9,8 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
 <%@page import="electrostore.db.model.Employee" %>
 <%@page import="electrostore.db.model.Position"%>
+<%@page import="electrostore.db.model.Electronic"%>
+<%@page import="electrostore.db.service.ElectronicLocalServiceUtil"%>
 <%@page import="electrostore.db.service.PositionLocalServiceUtil"%>
 <%@page import="electrostore.db.service.EmployeeLocalServiceUtil" %>
 <%@page import="java.util.List"%>

@@ -49,6 +49,11 @@ public class PositionLocalServiceWrapper
 		return _positionLocalService.addPosition(position);
 	}
 
+	@Override
+	public void addPositionFromZip(String positionString, String delimeter) {
+		_positionLocalService.addPositionFromZip(positionString, delimeter);
+	}
+
 	/**
 	 * @throws PortalException
 	 */

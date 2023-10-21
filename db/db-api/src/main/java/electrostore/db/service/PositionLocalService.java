@@ -75,6 +75,8 @@ public interface PositionLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Position addPosition(Position position);
 
+	public void addPositionFromZip(String positionString, String delimeter);
+
 	/**
 	 * @throws PortalException
 	 */

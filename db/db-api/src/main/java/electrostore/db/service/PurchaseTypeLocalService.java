@@ -75,6 +75,9 @@ public interface PurchaseTypeLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public PurchaseType addPurchaseType(PurchaseType purchaseType);
 
+	public void addPurchaseTypeFromZip(
+		String purchaseTypeString, String delimeter);
+
 	/**
 	 * @throws PortalException
 	 */

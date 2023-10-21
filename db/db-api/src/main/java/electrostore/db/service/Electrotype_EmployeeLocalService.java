@@ -77,6 +77,9 @@ public interface Electrotype_EmployeeLocalService
 	public Electrotype_Employee addElectrotype_Employee(
 		Electrotype_Employee electrotype_Employee);
 
+	public void addElectrotype_EmployeeFromZip(
+		String entityString, String delimeter);
+
 	/**
 	 * Creates a new electrotype_ employee with the primary key. Does not add the electrotype_ employee to the database.
 	 *

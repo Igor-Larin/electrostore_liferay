@@ -75,6 +75,8 @@ public interface ElectronicLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Electronic addElectronic(Electronic electronic);
 
+	public void addElectronicFromZip(String electronicString, String delimeter);
+
 	/**
 	 * Creates a new electronic with the primary key. Does not add the electronic to the database.
 	 *

@@ -61,6 +61,12 @@ public class ElectronicTypeLocalServiceUtil {
 		return getService().addElectronicType(electronicType);
 	}
 
+	public static void addElectronicTypeFromZip(
+		String electroTypeString, String delimeter) {
+
+		getService().addElectronicTypeFromZip(electroTypeString, delimeter);
+	}
+
 	/**
 	 * Creates a new electronic type with the primary key. Does not add the electronic type to the database.
 	 *

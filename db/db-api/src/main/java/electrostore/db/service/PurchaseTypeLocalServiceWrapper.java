@@ -50,6 +50,14 @@ public class PurchaseTypeLocalServiceWrapper
 		return _purchaseTypeLocalService.addPurchaseType(purchaseType);
 	}
 
+	@Override
+	public void addPurchaseTypeFromZip(
+		String purchaseTypeString, String delimeter) {
+
+		_purchaseTypeLocalService.addPurchaseTypeFromZip(
+			purchaseTypeString, delimeter);
+	}
+
 	/**
 	 * @throws PortalException
 	 */

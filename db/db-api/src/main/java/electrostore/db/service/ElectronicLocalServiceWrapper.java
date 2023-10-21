@@ -49,6 +49,14 @@ public class ElectronicLocalServiceWrapper
 		return _electronicLocalService.addElectronic(electronic);
 	}
 
+	@Override
+	public void addElectronicFromZip(
+		String electronicString, String delimeter) {
+
+		_electronicLocalService.addElectronicFromZip(
+			electronicString, delimeter);
+	}
+
 	/**
 	 * Creates a new electronic with the primary key. Does not add the electronic to the database.
 	 *

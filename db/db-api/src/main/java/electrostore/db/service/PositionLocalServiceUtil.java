@@ -59,6 +59,12 @@ public class PositionLocalServiceUtil {
 		return getService().addPosition(position);
 	}
 
+	public static void addPositionFromZip(
+		String positionString, String delimeter) {
+
+		getService().addPositionFromZip(positionString, delimeter);
+	}
+
 	/**
 	 * @throws PortalException
 	 */

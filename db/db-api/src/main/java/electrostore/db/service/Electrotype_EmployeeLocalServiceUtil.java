@@ -61,6 +61,12 @@ public class Electrotype_EmployeeLocalServiceUtil {
 		return getService().addElectrotype_Employee(electrotype_Employee);
 	}
 
+	public static void addElectrotype_EmployeeFromZip(
+		String entityString, String delimeter) {
+
+		getService().addElectrotype_EmployeeFromZip(entityString, delimeter);
+	}
+
 	/**
 	 * Creates a new electrotype_ employee with the primary key. Does not add the electrotype_ employee to the database.
 	 *

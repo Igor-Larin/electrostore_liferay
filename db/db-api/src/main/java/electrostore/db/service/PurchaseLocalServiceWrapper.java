@@ -49,6 +49,11 @@ public class PurchaseLocalServiceWrapper
 		return _purchaseLocalService.addPurchase(purchase);
 	}
 
+	@Override
+	public void addPurchaseFromZip(String purchaseString, String delimeter) {
+		_purchaseLocalService.addPurchaseFromZip(purchaseString, delimeter);
+	}
+
 	/**
 	 * @throws PortalException
 	 */

@@ -14,15 +14,15 @@
 
 package electrostore.db.service.impl;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.portlet.ActionRequest;
 
 import org.osgi.service.component.annotations.Component;
 
-import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -49,6 +49,40 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 		employee.setSex(isFemale);
 		employee.setBirthdate(ParamUtil.getDate(request, "birthdate", new SimpleDateFormat(datePattern)));
 		employee.setPosition_id(ParamUtil.getLong(request, "position"));
+		employeePersistence.update(employee);
+	}
+	
+	public void addEmployeeFromZip(String employeeString, String delimeter) {
+		long id, position_id;
+		String lastname, name, midname;
+		boolean isFemale;
+		Date birthdate;
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+		try(Scanner scanner = new Scanner(employeeString)) {
+			scanner.useDelimiter(delimeter);
+			id = scanner.nextLong();
+			if(employeePersistence.fetchByPrimaryKey(id) != null) {
+				System.out.println("Уже есть такой сотрудник");
+				return;
+			}
+			lastname = scanner.next();
+			name = scanner.next();
+			midname = scanner.next(); 
+			birthdate = formatter.parse(scanner.next());
+			position_id = scanner.nextLong();
+			isFemale = scanner.nextByte() == 1 ? true : false;
+		}
+		catch(Exception exception) {
+			System.out.println("Ошибка при чтении сотрудника из файла");
+			return;
+		}		
+		Employee employee = employeePersistence.create(id);
+		employee.setName(name);
+		employee.setLastname(lastname);
+		employee.setMidname(midname);		
+		employee.setSex(isFemale);
+		employee.setBirthdate(birthdate);
+		employee.setPosition_id(position_id);
 		employeePersistence.update(employee);
 	}
 	

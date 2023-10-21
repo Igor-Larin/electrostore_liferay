@@ -54,6 +54,11 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.addEmployee(employee);
 	}
 
+	@Override
+	public void addEmployeeFromZip(String employeeString, String delimeter) {
+		_employeeLocalService.addEmployeeFromZip(employeeString, delimeter);
+	}
+
 	/**
 	 * Creates a new employee with the primary key. Does not add the employee to the database.
 	 *

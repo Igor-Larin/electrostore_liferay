@@ -50,6 +50,14 @@ public class ElectronicTypeLocalServiceWrapper
 		return _electronicTypeLocalService.addElectronicType(electronicType);
 	}
 
+	@Override
+	public void addElectronicTypeFromZip(
+		String electroTypeString, String delimeter) {
+
+		_electronicTypeLocalService.addElectronicTypeFromZip(
+			electroTypeString, delimeter);
+	}
+
 	/**
 	 * Creates a new electronic type with the primary key. Does not add the electronic type to the database.
 	 *
