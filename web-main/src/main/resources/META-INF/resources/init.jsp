@@ -12,6 +12,10 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="electrostore.db.model.Position"%>
 <%@page import="electrostore.db.model.Electronic"%>
 <%@page import="electrostore.db.model.ElectronicType"%>
+<%@page import="electrostore.db.model.Purchase"%>
+<%@page import="electrostore.db.model.PurchaseType"%>
+<%@page import="electrostore.db.service.PurchaseTypeLocalServiceUtil"%>
+<%@page import="electrostore.db.service.PurchaseLocalServiceUtil"%>
 <%@page import="electrostore.db.service.ElectronicLocalServiceUtil"%>
 <%@page import="electrostore.db.service.PositionLocalServiceUtil"%>
 <%@page import="electrostore.db.service.EmployeeLocalServiceUtil" %>

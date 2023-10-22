@@ -36,6 +36,8 @@ import java.io.Serializable;
 
 import java.util.List;
 
+import javax.portlet.ActionRequest;
+
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
@@ -61,6 +63,7 @@ public interface PurchaseLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>electrostore.db.service.impl.PurchaseLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the purchase local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link PurchaseLocalServiceUtil} if injection and service tracking are not available.
 	 */
+	public void addPurchase(ActionRequest request) throws PortalException;
 
 	/**
 	 * Adds the purchase to the database. Also notifies the appropriate model listeners.
@@ -98,6 +101,8 @@ public interface PurchaseLocalService
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException;
+
+	public void deletePurchase(ActionRequest request) throws PortalException;
 
 	/**
 	 * Deletes the purchase with the primary key from the database. Also notifies the appropriate model listeners.
@@ -239,6 +244,9 @@ public interface PurchaseLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Purchase> getPurchases(int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Purchase> getPurchasesByOrder(int start, int end, String order);
 
 	/**
 	 * Returns the number of purchases.

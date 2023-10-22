@@ -15,6 +15,7 @@
 package electrostore.db.service.impl;
 
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 
 import electrostore.db.model.ElectronicType;
 import electrostore.db.service.base.ElectronicTypeLocalServiceBaseImpl;
@@ -43,7 +44,7 @@ public class ElectronicTypeLocalServiceImpl
 				System.out.println("Уже есть такой тип товара");
 				return;
 			}
-			name = scanner.next();
+			name = scanner.next();			
 		}
 		catch(Exception exception) {
 			System.out.println("Ошибка при чтении типа товара из файла");

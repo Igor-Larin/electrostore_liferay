@@ -248,6 +248,10 @@ public class EmployeeLocalServiceUtil {
 		return getService().getEmployees(start, end);
 	}
 
+	public static List<Employee> getEmployeesByElectroType(long electroType) {
+		return getService().getEmployeesByElectroType(electroType);
+	}
+
 	/**
 	 * Returns the number of employees.
 	 *

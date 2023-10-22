@@ -33,6 +33,9 @@
         <column name="is_archive" type="boolean"></column>
         <column name="description" type="String"></column>
         <column name="electrotype_id" type="long"></column>
+        <finder name="ElectronicType" return-type="Collection">
+            <finder-column name="electrotype_id"></finder-column>
+        </finder>
     </entity>
     
     <entity name="Purchase" local-service="true" remote-service="false" table="purchases">
@@ -50,5 +53,8 @@
     <entity name="Electrotype_Employee" remote-service="false" local-service="true" table="electrotype_employee">
         <column name="emp_id" type="long" primary="true"></column>
         <column name="electro_id" type="long" primary="true"></column>
+        <finder name="ElectronicType" return-type="Collection">
+            <finder-column name="electro_id"></finder-column>
+        </finder>
     </entity>
 </service-builder>

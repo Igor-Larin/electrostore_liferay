@@ -124,6 +124,183 @@ public class Electrotype_EmployeeUtil {
 	}
 
 	/**
+	 * Returns all the electrotype_ employees where electro_id = &#63;.
+	 *
+	 * @param electro_id the electro_id
+	 * @return the matching electrotype_ employees
+	 */
+	public static List<Electrotype_Employee> findByElectronicType(
+		long electro_id) {
+
+		return getPersistence().findByElectronicType(electro_id);
+	}
+
+	/**
+	 * Returns a range of all the electrotype_ employees where electro_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>Electrotype_EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param electro_id the electro_id
+	 * @param start the lower bound of the range of electrotype_ employees
+	 * @param end the upper bound of the range of electrotype_ employees (not inclusive)
+	 * @return the range of matching electrotype_ employees
+	 */
+	public static List<Electrotype_Employee> findByElectronicType(
+		long electro_id, int start, int end) {
+
+		return getPersistence().findByElectronicType(electro_id, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the electrotype_ employees where electro_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>Electrotype_EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param electro_id the electro_id
+	 * @param start the lower bound of the range of electrotype_ employees
+	 * @param end the upper bound of the range of electrotype_ employees (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching electrotype_ employees
+	 */
+	public static List<Electrotype_Employee> findByElectronicType(
+		long electro_id, int start, int end,
+		OrderByComparator<Electrotype_Employee> orderByComparator) {
+
+		return getPersistence().findByElectronicType(
+			electro_id, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the electrotype_ employees where electro_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>Electrotype_EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param electro_id the electro_id
+	 * @param start the lower bound of the range of electrotype_ employees
+	 * @param end the upper bound of the range of electrotype_ employees (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching electrotype_ employees
+	 */
+	public static List<Electrotype_Employee> findByElectronicType(
+		long electro_id, int start, int end,
+		OrderByComparator<Electrotype_Employee> orderByComparator,
+		boolean useFinderCache) {
+
+		return getPersistence().findByElectronicType(
+			electro_id, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns the first electrotype_ employee in the ordered set where electro_id = &#63;.
+	 *
+	 * @param electro_id the electro_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching electrotype_ employee
+	 * @throws NoSuchElectrotype_EmployeeException if a matching electrotype_ employee could not be found
+	 */
+	public static Electrotype_Employee findByElectronicType_First(
+			long electro_id,
+			OrderByComparator<Electrotype_Employee> orderByComparator)
+		throws electrostore.db.exception.NoSuchElectrotype_EmployeeException {
+
+		return getPersistence().findByElectronicType_First(
+			electro_id, orderByComparator);
+	}
+
+	/**
+	 * Returns the first electrotype_ employee in the ordered set where electro_id = &#63;.
+	 *
+	 * @param electro_id the electro_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching electrotype_ employee, or <code>null</code> if a matching electrotype_ employee could not be found
+	 */
+	public static Electrotype_Employee fetchByElectronicType_First(
+		long electro_id,
+		OrderByComparator<Electrotype_Employee> orderByComparator) {
+
+		return getPersistence().fetchByElectronicType_First(
+			electro_id, orderByComparator);
+	}
+
+	/**
+	 * Returns the last electrotype_ employee in the ordered set where electro_id = &#63;.
+	 *
+	 * @param electro_id the electro_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching electrotype_ employee
+	 * @throws NoSuchElectrotype_EmployeeException if a matching electrotype_ employee could not be found
+	 */
+	public static Electrotype_Employee findByElectronicType_Last(
+			long electro_id,
+			OrderByComparator<Electrotype_Employee> orderByComparator)
+		throws electrostore.db.exception.NoSuchElectrotype_EmployeeException {
+
+		return getPersistence().findByElectronicType_Last(
+			electro_id, orderByComparator);
+	}
+
+	/**
+	 * Returns the last electrotype_ employee in the ordered set where electro_id = &#63;.
+	 *
+	 * @param electro_id the electro_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching electrotype_ employee, or <code>null</code> if a matching electrotype_ employee could not be found
+	 */
+	public static Electrotype_Employee fetchByElectronicType_Last(
+		long electro_id,
+		OrderByComparator<Electrotype_Employee> orderByComparator) {
+
+		return getPersistence().fetchByElectronicType_Last(
+			electro_id, orderByComparator);
+	}
+
+	/**
+	 * Returns the electrotype_ employees before and after the current electrotype_ employee in the ordered set where electro_id = &#63;.
+	 *
+	 * @param electrotype_EmployeePK the primary key of the current electrotype_ employee
+	 * @param electro_id the electro_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next electrotype_ employee
+	 * @throws NoSuchElectrotype_EmployeeException if a electrotype_ employee with the primary key could not be found
+	 */
+	public static Electrotype_Employee[] findByElectronicType_PrevAndNext(
+			electrostore.db.service.persistence.Electrotype_EmployeePK
+				electrotype_EmployeePK,
+			long electro_id,
+			OrderByComparator<Electrotype_Employee> orderByComparator)
+		throws electrostore.db.exception.NoSuchElectrotype_EmployeeException {
+
+		return getPersistence().findByElectronicType_PrevAndNext(
+			electrotype_EmployeePK, electro_id, orderByComparator);
+	}
+
+	/**
+	 * Removes all the electrotype_ employees where electro_id = &#63; from the database.
+	 *
+	 * @param electro_id the electro_id
+	 */
+	public static void removeByElectronicType(long electro_id) {
+		getPersistence().removeByElectronicType(electro_id);
+	}
+
+	/**
+	 * Returns the number of electrotype_ employees where electro_id = &#63;.
+	 *
+	 * @param electro_id the electro_id
+	 * @return the number of matching electrotype_ employees
+	 */
+	public static int countByElectronicType(long electro_id) {
+		return getPersistence().countByElectronicType(electro_id);
+	}
+
+	/**
 	 * Caches the electrotype_ employee in the entity cache if it is enabled.
 	 *
 	 * @param electrotype_Employee the electrotype_ employee

@@ -32,6 +32,13 @@ public class PurchaseLocalServiceWrapper
 		_purchaseLocalService = purchaseLocalService;
 	}
 
+	@Override
+	public void addPurchase(javax.portlet.ActionRequest request)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_purchaseLocalService.addPurchase(request);
+	}
+
 	/**
 	 * Adds the purchase to the database. Also notifies the appropriate model listeners.
 	 *
@@ -85,6 +92,13 @@ public class PurchaseLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _purchaseLocalService.deletePersistedModel(persistedModel);
+	}
+
+	@Override
+	public void deletePurchase(javax.portlet.ActionRequest request)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_purchaseLocalService.deletePurchase(request);
 	}
 
 	/**
@@ -282,6 +296,13 @@ public class PurchaseLocalServiceWrapper
 		int start, int end) {
 
 		return _purchaseLocalService.getPurchases(start, end);
+	}
+
+	@Override
+	public java.util.List<electrostore.db.model.Purchase> getPurchasesByOrder(
+		int start, int end, String order) {
+
+		return _purchaseLocalService.getPurchasesByOrder(start, end, order);
 	}
 
 	/**

@@ -13,6 +13,7 @@
 		<field name="description" type="String">
 			<hint name="max-length">5000</hint>
 			<hint name="display-height">150</hint>
+			<hint name="display-width">200</hint>
 		</field>
 		<field name="electrotype_id" type="long" />
 	</model>

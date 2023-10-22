@@ -164,6 +164,13 @@ public class ElectronicPersistenceTest {
 	}
 
 	@Test
+	public void testCountByElectronicType() throws Exception {
+		_persistence.countByElectronicType(RandomTestUtil.nextLong());
+
+		_persistence.countByElectronicType(0L);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		Electronic newElectronic = addElectronic();
 

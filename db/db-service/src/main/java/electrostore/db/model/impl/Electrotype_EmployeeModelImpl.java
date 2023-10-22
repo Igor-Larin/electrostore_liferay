@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -95,18 +96,17 @@ public class Electrotype_EmployeeModelImpl
 	public static final String TX_MANAGER = "liferayTransactionManager";
 
 	/**
-	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
-	 *		#getColumnBitmask(String)}
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long EMP_ID_COLUMN_BITMASK = 1L;
+	public static final long ELECTRO_ID_COLUMN_BITMASK = 1L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
 	 *		#getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long ELECTRO_ID_COLUMN_BITMASK = 2L;
+	public static final long EMP_ID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
@@ -267,6 +267,16 @@ public class Electrotype_EmployeeModelImpl
 		}
 
 		_electro_id = electro_id;
+	}
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *             #getColumnOriginalValue(String)}
+	 */
+	@Deprecated
+	public long getOriginalElectro_id() {
+		return GetterUtil.getLong(
+			this.<Long>getColumnOriginalValue("electro_id"));
 	}
 
 	public long getColumnBitmask() {

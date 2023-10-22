@@ -14,16 +14,25 @@
 
 package electrostore.db.service.impl;
 
-import com.liferay.portal.aop.AopService;
-
-import electrostore.db.model.Purchase;
-import electrostore.db.service.base.PurchaseLocalServiceBaseImpl;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
+import javax.portlet.ActionRequest;
+
 import org.osgi.service.component.annotations.Component;
+
+import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+
+import electrostore.db.model.Electronic;
+import electrostore.db.model.Purchase;
+import electrostore.db.service.base.PurchaseLocalServiceBaseImpl;
 
 /**
  * @author Brian Wing Shun Chan
@@ -33,6 +42,46 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class PurchaseLocalServiceImpl extends PurchaseLocalServiceBaseImpl {
+	
+	public List<Purchase> getPurchasesByOrder(int start, int end, String order) {
+		if(order.trim().equals("none"))
+			return purchasePersistence.findAll(start, end);
+		else {
+			boolean ascOrder = order.trim().equals("asc");
+			OrderByComparator<Purchase> purchaseComparator = OrderByComparatorFactoryUtil.create("purchases", "purchase_date", ascOrder);
+			return purchasePersistence.findAll(start, end, purchaseComparator);
+		}
+	}
+	
+	public void deletePurchase(ActionRequest request) throws PortalException {
+		long purchaseId = ParamUtil.getLong(request, "purchaseId");
+		Purchase purchase = purchasePersistence.findByPrimaryKey(purchaseId);
+		Electronic electronic = electronicPersistence.findByPrimaryKey(purchase.getElectronic_id());
+		if(electronic.getIs_archive())
+			electronic.setIs_archive(false);
+		int count = electronic.getElectronic_count() + 1;
+		electronic.setElectronic_count(count);
+		electronicPersistence.update(electronic);
+		deletePurchase(purchaseId);
+	}
+	
+	public void addPurchase(ActionRequest request) throws PortalException {
+		long id = counterLocalService.increment();
+		long electroId = ParamUtil.getLong(request, "electronicId");
+		int electroCount;
+		Purchase purchase = purchasePersistence.create(id);
+		purchase.setElectronic_id(electroId);
+		purchase.setEmployee_id(ParamUtil.getLong(request, "employee"));
+		purchase.setPurchasetype_id(ParamUtil.getLong(request, "purchasetype"));
+		purchase.setPurchase_date(ParamUtil.getDate(request, "purchaseDate", new SimpleDateFormat("yyyy-MM-dd HH:mm")));
+		Electronic electronic = electronicPersistence.findByPrimaryKey(electroId);
+		electroCount = electronic.getElectronic_count() - 1;
+		electronic.setIs_archive(!electronic.getIs_present() && electroCount == 0);
+		electronic.setElectronic_count(electroCount);
+		electronicPersistence.update(electronic);
+		purchasePersistence.update(purchase);
+	}
+	
 	public void addPurchaseFromZip(String purchaseString, String delimeter) {
 		long id, electro_id, employee_id, purchaseType_id;
 		Date purchase_date;

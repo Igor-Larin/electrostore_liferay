@@ -121,6 +121,178 @@ public class ElectronicUtil {
 	}
 
 	/**
+	 * Returns all the electronics where electrotype_id = &#63;.
+	 *
+	 * @param electrotype_id the electrotype_id
+	 * @return the matching electronics
+	 */
+	public static List<Electronic> findByElectronicType(long electrotype_id) {
+		return getPersistence().findByElectronicType(electrotype_id);
+	}
+
+	/**
+	 * Returns a range of all the electronics where electrotype_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>ElectronicModelImpl</code>.
+	 * </p>
+	 *
+	 * @param electrotype_id the electrotype_id
+	 * @param start the lower bound of the range of electronics
+	 * @param end the upper bound of the range of electronics (not inclusive)
+	 * @return the range of matching electronics
+	 */
+	public static List<Electronic> findByElectronicType(
+		long electrotype_id, int start, int end) {
+
+		return getPersistence().findByElectronicType(
+			electrotype_id, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the electronics where electrotype_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>ElectronicModelImpl</code>.
+	 * </p>
+	 *
+	 * @param electrotype_id the electrotype_id
+	 * @param start the lower bound of the range of electronics
+	 * @param end the upper bound of the range of electronics (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching electronics
+	 */
+	public static List<Electronic> findByElectronicType(
+		long electrotype_id, int start, int end,
+		OrderByComparator<Electronic> orderByComparator) {
+
+		return getPersistence().findByElectronicType(
+			electrotype_id, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the electronics where electrotype_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>ElectronicModelImpl</code>.
+	 * </p>
+	 *
+	 * @param electrotype_id the electrotype_id
+	 * @param start the lower bound of the range of electronics
+	 * @param end the upper bound of the range of electronics (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching electronics
+	 */
+	public static List<Electronic> findByElectronicType(
+		long electrotype_id, int start, int end,
+		OrderByComparator<Electronic> orderByComparator,
+		boolean useFinderCache) {
+
+		return getPersistence().findByElectronicType(
+			electrotype_id, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns the first electronic in the ordered set where electrotype_id = &#63;.
+	 *
+	 * @param electrotype_id the electrotype_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching electronic
+	 * @throws NoSuchElectronicException if a matching electronic could not be found
+	 */
+	public static Electronic findByElectronicType_First(
+			long electrotype_id,
+			OrderByComparator<Electronic> orderByComparator)
+		throws electrostore.db.exception.NoSuchElectronicException {
+
+		return getPersistence().findByElectronicType_First(
+			electrotype_id, orderByComparator);
+	}
+
+	/**
+	 * Returns the first electronic in the ordered set where electrotype_id = &#63;.
+	 *
+	 * @param electrotype_id the electrotype_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching electronic, or <code>null</code> if a matching electronic could not be found
+	 */
+	public static Electronic fetchByElectronicType_First(
+		long electrotype_id, OrderByComparator<Electronic> orderByComparator) {
+
+		return getPersistence().fetchByElectronicType_First(
+			electrotype_id, orderByComparator);
+	}
+
+	/**
+	 * Returns the last electronic in the ordered set where electrotype_id = &#63;.
+	 *
+	 * @param electrotype_id the electrotype_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching electronic
+	 * @throws NoSuchElectronicException if a matching electronic could not be found
+	 */
+	public static Electronic findByElectronicType_Last(
+			long electrotype_id,
+			OrderByComparator<Electronic> orderByComparator)
+		throws electrostore.db.exception.NoSuchElectronicException {
+
+		return getPersistence().findByElectronicType_Last(
+			electrotype_id, orderByComparator);
+	}
+
+	/**
+	 * Returns the last electronic in the ordered set where electrotype_id = &#63;.
+	 *
+	 * @param electrotype_id the electrotype_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching electronic, or <code>null</code> if a matching electronic could not be found
+	 */
+	public static Electronic fetchByElectronicType_Last(
+		long electrotype_id, OrderByComparator<Electronic> orderByComparator) {
+
+		return getPersistence().fetchByElectronicType_Last(
+			electrotype_id, orderByComparator);
+	}
+
+	/**
+	 * Returns the electronics before and after the current electronic in the ordered set where electrotype_id = &#63;.
+	 *
+	 * @param electronic_id the primary key of the current electronic
+	 * @param electrotype_id the electrotype_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next electronic
+	 * @throws NoSuchElectronicException if a electronic with the primary key could not be found
+	 */
+	public static Electronic[] findByElectronicType_PrevAndNext(
+			long electronic_id, long electrotype_id,
+			OrderByComparator<Electronic> orderByComparator)
+		throws electrostore.db.exception.NoSuchElectronicException {
+
+		return getPersistence().findByElectronicType_PrevAndNext(
+			electronic_id, electrotype_id, orderByComparator);
+	}
+
+	/**
+	 * Removes all the electronics where electrotype_id = &#63; from the database.
+	 *
+	 * @param electrotype_id the electrotype_id
+	 */
+	public static void removeByElectronicType(long electrotype_id) {
+		getPersistence().removeByElectronicType(electrotype_id);
+	}
+
+	/**
+	 * Returns the number of electronics where electrotype_id = &#63;.
+	 *
+	 * @param electrotype_id the electrotype_id
+	 * @return the number of matching electronics
+	 */
+	public static int countByElectronicType(long electrotype_id) {
+		return getPersistence().countByElectronicType(electrotype_id);
+	}
+
+	/**
 	 * Caches the electronic in the entity cache if it is enabled.
 	 *
 	 * @param electronic the electronic

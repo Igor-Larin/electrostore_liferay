@@ -266,6 +266,13 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.getEmployees(start, end);
 	}
 
+	@Override
+	public java.util.List<electrostore.db.model.Employee>
+		getEmployeesByElectroType(long electroType) {
+
+		return _employeeLocalService.getEmployeesByElectroType(electroType);
+	}
+
 	/**
 	 * Returns the number of employees.
 	 *

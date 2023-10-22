@@ -44,6 +44,11 @@ public class PurchaseLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>electrostore.db.service.impl.PurchaseLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static void addPurchase(javax.portlet.ActionRequest request)
+		throws PortalException {
+
+		getService().addPurchase(request);
+	}
 
 	/**
 	 * Adds the purchase to the database. Also notifies the appropriate model listeners.
@@ -93,6 +98,12 @@ public class PurchaseLocalServiceUtil {
 		throws PortalException {
 
 		return getService().deletePersistedModel(persistedModel);
+	}
+
+	public static void deletePurchase(javax.portlet.ActionRequest request)
+		throws PortalException {
+
+		getService().deletePurchase(request);
 	}
 
 	/**
@@ -264,6 +275,12 @@ public class PurchaseLocalServiceUtil {
 	 */
 	public static List<Purchase> getPurchases(int start, int end) {
 		return getService().getPurchases(start, end);
+	}
+
+	public static List<Purchase> getPurchasesByOrder(
+		int start, int end, String order) {
+
+		return getService().getPurchasesByOrder(start, end, order);
 	}
 
 	/**

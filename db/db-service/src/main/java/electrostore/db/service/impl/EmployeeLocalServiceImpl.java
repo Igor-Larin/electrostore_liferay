@@ -15,6 +15,7 @@
 package electrostore.db.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -27,6 +28,7 @@ import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ParamUtil;
 
+import electrostore.db.model.Electrotype_Employee;
 import electrostore.db.model.Employee;
 import electrostore.db.service.base.EmployeeLocalServiceBaseImpl;
 
@@ -38,10 +40,20 @@ import electrostore.db.service.base.EmployeeLocalServiceBaseImpl;
 	service = AopService.class
 )
 public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
+	
+	public List<Employee> getEmployeesByElectroType(long electroType) {
+		List<Electrotype_Employee> employeesTypes = electrotype_EmployeePersistence.findByElectronicType(electroType);
+		List<Employee> employees = new ArrayList<>();
+		for (Electrotype_Employee emplType : employeesTypes) {
+			employees.add(employeePersistence.fetchByPrimaryKey(emplType.getEmp_id()));
+		}
+		return employees;
+	}
+	
 	public void addEmployee(ActionRequest request) {
 		long id = counterLocalService.increment();
 		boolean isFemale = ParamUtil.getBoolean(request, "sex");
-		String datePattern = "MM/dd/yyyy";
+		String datePattern = "yyyy-MM-dd";
 		Employee employee = employeePersistence.create(id);
 		employee.setName(ParamUtil.getString(request, "name"));
 		employee.setLastname(ParamUtil.getString(request, "lastname"));
@@ -89,7 +101,7 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 	public void updateEmployee(ActionRequest request) throws PortalException {
 		long id = ParamUtil.getLong(request, "employeeId");
 		boolean isFemale = ParamUtil.getBoolean(request, "sex");
-		String datePattern = "dd/MM/yyyy";
+		String datePattern = "yyyy-MM-dd";
 		Employee employee = employeePersistence.findByPrimaryKey(id);
 		employee.setName(ParamUtil.getString(request, "name"));
 		employee.setLastname(ParamUtil.getString(request, "lastname"));
