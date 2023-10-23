@@ -26,7 +26,7 @@
     
     <entity name="Electronic" local-service="true" remote-service="false" table="electronics">
         <column name="electronic_id" type="long" primary="true"></column>
-        <column name="name" type="String"></column>
+        <column name="name" type="String"></column>        
         <column name="price" type="int"></column>
         <column name="electronic_count" type="int"></column>
         <column name="is_present" type="boolean"></column>
@@ -35,6 +35,9 @@
         <column name="electrotype_id" type="long"></column>
         <finder name="ElectronicType" return-type="Collection">
             <finder-column name="electrotype_id"></finder-column>
+        </finder>
+        <finder name="ElectronicName" return-type="Electronic">
+            <finder-column name="name"></finder-column>
         </finder>
     </entity>
     

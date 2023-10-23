@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import electrostore.db.exception.NoSuchElectronicException;
 import electrostore.db.model.Electronic;
@@ -49,9 +50,11 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -595,6 +598,248 @@ public class ElectronicPersistenceImpl
 	private static final String _FINDER_COLUMN_ELECTRONICTYPE_ELECTROTYPE_ID_2 =
 		"electronic.electrotype_id = ?";
 
+	private FinderPath _finderPathFetchByElectronicName;
+	private FinderPath _finderPathCountByElectronicName;
+
+	/**
+	 * Returns the electronic where name = &#63; or throws a <code>NoSuchElectronicException</code> if it could not be found.
+	 *
+	 * @param name the name
+	 * @return the matching electronic
+	 * @throws NoSuchElectronicException if a matching electronic could not be found
+	 */
+	@Override
+	public Electronic findByElectronicName(String name)
+		throws NoSuchElectronicException {
+
+		Electronic electronic = fetchByElectronicName(name);
+
+		if (electronic == null) {
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			sb.append("name=");
+			sb.append(name);
+
+			sb.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(sb.toString());
+			}
+
+			throw new NoSuchElectronicException(sb.toString());
+		}
+
+		return electronic;
+	}
+
+	/**
+	 * Returns the electronic where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param name the name
+	 * @return the matching electronic, or <code>null</code> if a matching electronic could not be found
+	 */
+	@Override
+	public Electronic fetchByElectronicName(String name) {
+		return fetchByElectronicName(name, true);
+	}
+
+	/**
+	 * Returns the electronic where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param name the name
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching electronic, or <code>null</code> if a matching electronic could not be found
+	 */
+	@Override
+	public Electronic fetchByElectronicName(
+		String name, boolean useFinderCache) {
+
+		name = Objects.toString(name, "");
+
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {name};
+		}
+
+		Object result = null;
+
+		if (useFinderCache) {
+			result = finderCache.getResult(
+				_finderPathFetchByElectronicName, finderArgs, this);
+		}
+
+		if (result instanceof Electronic) {
+			Electronic electronic = (Electronic)result;
+
+			if (!Objects.equals(name, electronic.getName())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler sb = new StringBundler(3);
+
+			sb.append(_SQL_SELECT_ELECTRONIC_WHERE);
+
+			boolean bindName = false;
+
+			if (name.isEmpty()) {
+				sb.append(_FINDER_COLUMN_ELECTRONICNAME_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				sb.append(_FINDER_COLUMN_ELECTRONICNAME_NAME_2);
+			}
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				if (bindName) {
+					queryPos.add(name);
+				}
+
+				List<Electronic> list = query.list();
+
+				if (list.isEmpty()) {
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByElectronicName, finderArgs, list);
+					}
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {name};
+							}
+
+							_log.warn(
+								"ElectronicPersistenceImpl.fetchByElectronicName(String, boolean) with parameters (" +
+									StringUtil.merge(finderArgs) +
+										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					Electronic electronic = list.get(0);
+
+					result = electronic;
+
+					cacheResult(electronic);
+				}
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Electronic)result;
+		}
+	}
+
+	/**
+	 * Removes the electronic where name = &#63; from the database.
+	 *
+	 * @param name the name
+	 * @return the electronic that was removed
+	 */
+	@Override
+	public Electronic removeByElectronicName(String name)
+		throws NoSuchElectronicException {
+
+		Electronic electronic = findByElectronicName(name);
+
+		return remove(electronic);
+	}
+
+	/**
+	 * Returns the number of electronics where name = &#63;.
+	 *
+	 * @param name the name
+	 * @return the number of matching electronics
+	 */
+	@Override
+	public int countByElectronicName(String name) {
+		name = Objects.toString(name, "");
+
+		FinderPath finderPath = _finderPathCountByElectronicName;
+
+		Object[] finderArgs = new Object[] {name};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler sb = new StringBundler(2);
+
+			sb.append(_SQL_COUNT_ELECTRONIC_WHERE);
+
+			boolean bindName = false;
+
+			if (name.isEmpty()) {
+				sb.append(_FINDER_COLUMN_ELECTRONICNAME_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				sb.append(_FINDER_COLUMN_ELECTRONICNAME_NAME_2);
+			}
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				if (bindName) {
+					queryPos.add(name);
+				}
+
+				count = (Long)query.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ELECTRONICNAME_NAME_2 =
+		"electronic.name = ?";
+
+	private static final String _FINDER_COLUMN_ELECTRONICNAME_NAME_3 =
+		"(electronic.name IS NULL OR electronic.name = '')";
+
 	public ElectronicPersistenceImpl() {
 		setModelClass(Electronic.class);
 
@@ -611,6 +856,10 @@ public class ElectronicPersistenceImpl
 	public void cacheResult(Electronic electronic) {
 		entityCache.putResult(
 			ElectronicImpl.class, electronic.getPrimaryKey(), electronic);
+
+		finderCache.putResult(
+			_finderPathFetchByElectronicName,
+			new Object[] {electronic.getName()}, electronic);
 	}
 
 	private int _valueObjectFinderCacheListThreshold;
@@ -682,6 +931,17 @@ public class ElectronicPersistenceImpl
 		for (Serializable primaryKey : primaryKeys) {
 			entityCache.removeResult(ElectronicImpl.class, primaryKey);
 		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		ElectronicModelImpl electronicModelImpl) {
+
+		Object[] args = new Object[] {electronicModelImpl.getName()};
+
+		finderCache.putResult(
+			_finderPathCountByElectronicName, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByElectronicName, args, electronicModelImpl, false);
 	}
 
 	/**
@@ -829,6 +1089,8 @@ public class ElectronicPersistenceImpl
 
 		entityCache.putResult(
 			ElectronicImpl.class, electronicModelImpl, false, true);
+
+		cacheUniqueFindersCache(electronicModelImpl);
 
 		if (isNew) {
 			electronic.setNew(false);
@@ -1132,6 +1394,15 @@ public class ElectronicPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByElectronicType",
 			new String[] {Long.class.getName()},
 			new String[] {"electrotype_id"}, false);
+
+		_finderPathFetchByElectronicName = _createFinderPath(
+			FINDER_CLASS_NAME_ENTITY, "fetchByElectronicName",
+			new String[] {String.class.getName()}, new String[] {"name"}, true);
+
+		_finderPathCountByElectronicName = _createFinderPath(
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByElectronicName",
+			new String[] {String.class.getName()}, new String[] {"name"},
+			false);
 
 		_setElectronicUtilPersistence(this);
 	}

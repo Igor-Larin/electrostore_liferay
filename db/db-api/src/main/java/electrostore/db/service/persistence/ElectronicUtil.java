@@ -293,6 +293,64 @@ public class ElectronicUtil {
 	}
 
 	/**
+	 * Returns the electronic where name = &#63; or throws a <code>NoSuchElectronicException</code> if it could not be found.
+	 *
+	 * @param name the name
+	 * @return the matching electronic
+	 * @throws NoSuchElectronicException if a matching electronic could not be found
+	 */
+	public static Electronic findByElectronicName(String name)
+		throws electrostore.db.exception.NoSuchElectronicException {
+
+		return getPersistence().findByElectronicName(name);
+	}
+
+	/**
+	 * Returns the electronic where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param name the name
+	 * @return the matching electronic, or <code>null</code> if a matching electronic could not be found
+	 */
+	public static Electronic fetchByElectronicName(String name) {
+		return getPersistence().fetchByElectronicName(name);
+	}
+
+	/**
+	 * Returns the electronic where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param name the name
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching electronic, or <code>null</code> if a matching electronic could not be found
+	 */
+	public static Electronic fetchByElectronicName(
+		String name, boolean useFinderCache) {
+
+		return getPersistence().fetchByElectronicName(name, useFinderCache);
+	}
+
+	/**
+	 * Removes the electronic where name = &#63; from the database.
+	 *
+	 * @param name the name
+	 * @return the electronic that was removed
+	 */
+	public static Electronic removeByElectronicName(String name)
+		throws electrostore.db.exception.NoSuchElectronicException {
+
+		return getPersistence().removeByElectronicName(name);
+	}
+
+	/**
+	 * Returns the number of electronics where name = &#63;.
+	 *
+	 * @param name the name
+	 * @return the number of matching electronics
+	 */
+	public static int countByElectronicName(String name) {
+		return getPersistence().countByElectronicName(name);
+	}
+
+	/**
 	 * Caches the electronic in the entity cache if it is enabled.
 	 *
 	 * @param electronic the electronic

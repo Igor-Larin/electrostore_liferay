@@ -185,6 +185,51 @@ public interface ElectronicPersistence extends BasePersistence<Electronic> {
 	public int countByElectronicType(long electrotype_id);
 
 	/**
+	 * Returns the electronic where name = &#63; or throws a <code>NoSuchElectronicException</code> if it could not be found.
+	 *
+	 * @param name the name
+	 * @return the matching electronic
+	 * @throws NoSuchElectronicException if a matching electronic could not be found
+	 */
+	public Electronic findByElectronicName(String name)
+		throws NoSuchElectronicException;
+
+	/**
+	 * Returns the electronic where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param name the name
+	 * @return the matching electronic, or <code>null</code> if a matching electronic could not be found
+	 */
+	public Electronic fetchByElectronicName(String name);
+
+	/**
+	 * Returns the electronic where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param name the name
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching electronic, or <code>null</code> if a matching electronic could not be found
+	 */
+	public Electronic fetchByElectronicName(
+		String name, boolean useFinderCache);
+
+	/**
+	 * Removes the electronic where name = &#63; from the database.
+	 *
+	 * @param name the name
+	 * @return the electronic that was removed
+	 */
+	public Electronic removeByElectronicName(String name)
+		throws NoSuchElectronicException;
+
+	/**
+	 * Returns the number of electronics where name = &#63;.
+	 *
+	 * @param name the name
+	 * @return the number of matching electronics
+	 */
+	public int countByElectronicName(String name);
+
+	/**
 	 * Caches the electronic in the entity cache if it is enabled.
 	 *
 	 * @param electronic the electronic

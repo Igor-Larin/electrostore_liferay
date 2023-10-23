@@ -42,13 +42,16 @@ public class ElectronicLocalServiceImpl extends ElectronicLocalServiceBaseImpl {
 	public void addElectronic(ActionRequest request) {
 		long id = counterLocalService.increment();
 		Electronic electronic = electronicLocalService.createElectronic(id);
-		electronic.setName(ParamUtil.getString(request, "name"));
+		String name = ParamUtil.getString(request, "name");	
+		electronic.setName(name);
 		electronic.setDescription(ParamUtil.getString(request, "description"));
 		electronic.setPrice(ParamUtil.getInteger(request, "price"));
-		electronic.setElectronic_count(ParamUtil.getInteger(request, "count"));
+		int count = ParamUtil.getInteger(request, "count");
+		electronic.setElectronic_count(count);
+		boolean isPresent = ParamUtil.getBoolean(request, "is_present");
+		electronic.setIs_present(isPresent);
 		electronic.setElectrotype_id(ParamUtil.getLong(request, "electrotype"));
-		electronic.setIs_archive(ParamUtil.getBoolean(request, "is_archive"));
-		electronic.setIs_present(ParamUtil.getBoolean(request, "is_present"));
+		electronic.setIs_archive(!isPresent && count < 1);		
 		electronicPersistence.update(electronic);
 	}
 	
@@ -58,10 +61,12 @@ public class ElectronicLocalServiceImpl extends ElectronicLocalServiceBaseImpl {
 		electronic.setName(ParamUtil.getString(request, "name"));
 		electronic.setDescription(ParamUtil.getString(request, "description"));
 		electronic.setPrice(ParamUtil.getInteger(request, "price"));
-		electronic.setElectronic_count(ParamUtil.getInteger(request, "count"));
+		int count = ParamUtil.getInteger(request, "count");
+		electronic.setElectronic_count(count);
+		boolean isPresent = ParamUtil.getBoolean(request, "is_present");
+		electronic.setIs_present(isPresent);
 		electronic.setElectrotype_id(ParamUtil.getLong(request, "electrotype"));
-		electronic.setIs_archive(ParamUtil.getBoolean(request, "is_archive"));
-		electronic.setIs_present(ParamUtil.getBoolean(request, "is_present"));
+		electronic.setIs_archive(!isPresent && count < 1);
 		electronicPersistence.update(electronic);
 	}
 	

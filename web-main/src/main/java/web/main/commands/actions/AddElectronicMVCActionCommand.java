@@ -8,6 +8,8 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 
 import electrostore.db.service.ElectronicLocalService;
 import web.main.constants.WebMainPortletKeys;
@@ -30,9 +32,10 @@ public class AddElectronicMVCActionCommand implements MVCActionCommand {
 		try {
 			System.out.println("in add employee");
 			electronicLocalService.addElectronic(actionRequest);
-			actionResponse.getRenderParameters().setValue("mvcPath", "/electronics/electronics.jsp");	
+			actionResponse.getRenderParameters().setValue("mvcPath", "/electronics/electronics.jsp");
 		}
 		catch(Exception exception) {
+			//SessionErrors.add(actionRequest, exception.getClass().getName());
 			return true;
 		}		
 		return false;
