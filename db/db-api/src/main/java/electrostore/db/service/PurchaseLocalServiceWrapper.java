@@ -239,6 +239,16 @@ public class PurchaseLocalServiceWrapper
 	}
 
 	@Override
+	public String getElectrotechPurchasesCount() {
+		return _purchaseLocalService.getElectrotechPurchasesCount();
+	}
+
+	@Override
+	public String getGainByCash() {
+		return _purchaseLocalService.getGainByCash();
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 

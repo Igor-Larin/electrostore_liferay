@@ -98,6 +98,508 @@ public class Electrotype_EmployeePersistenceImpl
 	private FinderPath _finderPathWithPaginationFindAll;
 	private FinderPath _finderPathWithoutPaginationFindAll;
 	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByEmployeeId;
+	private FinderPath _finderPathWithoutPaginationFindByEmployeeId;
+	private FinderPath _finderPathCountByEmployeeId;
+
+	/**
+	 * Returns all the electrotype_ employees where emp_id = &#63;.
+	 *
+	 * @param emp_id the emp_id
+	 * @return the matching electrotype_ employees
+	 */
+	@Override
+	public List<Electrotype_Employee> findByEmployeeId(long emp_id) {
+		return findByEmployeeId(
+			emp_id, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the electrotype_ employees where emp_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>Electrotype_EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param emp_id the emp_id
+	 * @param start the lower bound of the range of electrotype_ employees
+	 * @param end the upper bound of the range of electrotype_ employees (not inclusive)
+	 * @return the range of matching electrotype_ employees
+	 */
+	@Override
+	public List<Electrotype_Employee> findByEmployeeId(
+		long emp_id, int start, int end) {
+
+		return findByEmployeeId(emp_id, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the electrotype_ employees where emp_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>Electrotype_EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param emp_id the emp_id
+	 * @param start the lower bound of the range of electrotype_ employees
+	 * @param end the upper bound of the range of electrotype_ employees (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching electrotype_ employees
+	 */
+	@Override
+	public List<Electrotype_Employee> findByEmployeeId(
+		long emp_id, int start, int end,
+		OrderByComparator<Electrotype_Employee> orderByComparator) {
+
+		return findByEmployeeId(emp_id, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the electrotype_ employees where emp_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>Electrotype_EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param emp_id the emp_id
+	 * @param start the lower bound of the range of electrotype_ employees
+	 * @param end the upper bound of the range of electrotype_ employees (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching electrotype_ employees
+	 */
+	@Override
+	public List<Electrotype_Employee> findByEmployeeId(
+		long emp_id, int start, int end,
+		OrderByComparator<Electrotype_Employee> orderByComparator,
+		boolean useFinderCache) {
+
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByEmployeeId;
+				finderArgs = new Object[] {emp_id};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByEmployeeId;
+			finderArgs = new Object[] {emp_id, start, end, orderByComparator};
+		}
+
+		List<Electrotype_Employee> list = null;
+
+		if (useFinderCache) {
+			list = (List<Electrotype_Employee>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (Electrotype_Employee electrotype_Employee : list) {
+					if (emp_id != electrotype_Employee.getEmp_id()) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler sb = null;
+
+			if (orderByComparator != null) {
+				sb = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				sb = new StringBundler(3);
+			}
+
+			sb.append(_SQL_SELECT_ELECTROTYPE_EMPLOYEE_WHERE);
+
+			sb.append(_FINDER_COLUMN_EMPLOYEEID_EMP_ID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					sb, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else {
+				sb.append(Electrotype_EmployeeModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				queryPos.add(emp_id);
+
+				list = (List<Electrotype_Employee>)QueryUtil.list(
+					query, getDialect(), start, end);
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first electrotype_ employee in the ordered set where emp_id = &#63;.
+	 *
+	 * @param emp_id the emp_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching electrotype_ employee
+	 * @throws NoSuchElectrotype_EmployeeException if a matching electrotype_ employee could not be found
+	 */
+	@Override
+	public Electrotype_Employee findByEmployeeId_First(
+			long emp_id,
+			OrderByComparator<Electrotype_Employee> orderByComparator)
+		throws NoSuchElectrotype_EmployeeException {
+
+		Electrotype_Employee electrotype_Employee = fetchByEmployeeId_First(
+			emp_id, orderByComparator);
+
+		if (electrotype_Employee != null) {
+			return electrotype_Employee;
+		}
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		sb.append("emp_id=");
+		sb.append(emp_id);
+
+		sb.append("}");
+
+		throw new NoSuchElectrotype_EmployeeException(sb.toString());
+	}
+
+	/**
+	 * Returns the first electrotype_ employee in the ordered set where emp_id = &#63;.
+	 *
+	 * @param emp_id the emp_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching electrotype_ employee, or <code>null</code> if a matching electrotype_ employee could not be found
+	 */
+	@Override
+	public Electrotype_Employee fetchByEmployeeId_First(
+		long emp_id,
+		OrderByComparator<Electrotype_Employee> orderByComparator) {
+
+		List<Electrotype_Employee> list = findByEmployeeId(
+			emp_id, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last electrotype_ employee in the ordered set where emp_id = &#63;.
+	 *
+	 * @param emp_id the emp_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching electrotype_ employee
+	 * @throws NoSuchElectrotype_EmployeeException if a matching electrotype_ employee could not be found
+	 */
+	@Override
+	public Electrotype_Employee findByEmployeeId_Last(
+			long emp_id,
+			OrderByComparator<Electrotype_Employee> orderByComparator)
+		throws NoSuchElectrotype_EmployeeException {
+
+		Electrotype_Employee electrotype_Employee = fetchByEmployeeId_Last(
+			emp_id, orderByComparator);
+
+		if (electrotype_Employee != null) {
+			return electrotype_Employee;
+		}
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		sb.append("emp_id=");
+		sb.append(emp_id);
+
+		sb.append("}");
+
+		throw new NoSuchElectrotype_EmployeeException(sb.toString());
+	}
+
+	/**
+	 * Returns the last electrotype_ employee in the ordered set where emp_id = &#63;.
+	 *
+	 * @param emp_id the emp_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching electrotype_ employee, or <code>null</code> if a matching electrotype_ employee could not be found
+	 */
+	@Override
+	public Electrotype_Employee fetchByEmployeeId_Last(
+		long emp_id,
+		OrderByComparator<Electrotype_Employee> orderByComparator) {
+
+		int count = countByEmployeeId(emp_id);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Electrotype_Employee> list = findByEmployeeId(
+			emp_id, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the electrotype_ employees before and after the current electrotype_ employee in the ordered set where emp_id = &#63;.
+	 *
+	 * @param electrotype_EmployeePK the primary key of the current electrotype_ employee
+	 * @param emp_id the emp_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next electrotype_ employee
+	 * @throws NoSuchElectrotype_EmployeeException if a electrotype_ employee with the primary key could not be found
+	 */
+	@Override
+	public Electrotype_Employee[] findByEmployeeId_PrevAndNext(
+			Electrotype_EmployeePK electrotype_EmployeePK, long emp_id,
+			OrderByComparator<Electrotype_Employee> orderByComparator)
+		throws NoSuchElectrotype_EmployeeException {
+
+		Electrotype_Employee electrotype_Employee = findByPrimaryKey(
+			electrotype_EmployeePK);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Electrotype_Employee[] array = new Electrotype_EmployeeImpl[3];
+
+			array[0] = getByEmployeeId_PrevAndNext(
+				session, electrotype_Employee, emp_id, orderByComparator, true);
+
+			array[1] = electrotype_Employee;
+
+			array[2] = getByEmployeeId_PrevAndNext(
+				session, electrotype_Employee, emp_id, orderByComparator,
+				false);
+
+			return array;
+		}
+		catch (Exception exception) {
+			throw processException(exception);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Electrotype_Employee getByEmployeeId_PrevAndNext(
+		Session session, Electrotype_Employee electrotype_Employee, long emp_id,
+		OrderByComparator<Electrotype_Employee> orderByComparator,
+		boolean previous) {
+
+		StringBundler sb = null;
+
+		if (orderByComparator != null) {
+			sb = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			sb = new StringBundler(3);
+		}
+
+		sb.append(_SQL_SELECT_ELECTROTYPE_EMPLOYEE_WHERE);
+
+		sb.append(_FINDER_COLUMN_EMPLOYEEID_EMP_ID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				sb.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				sb.append(_ORDER_BY_ENTITY_ALIAS);
+				sb.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						sb.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						sb.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						sb.append(WHERE_GREATER_THAN);
+					}
+					else {
+						sb.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			sb.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				sb.append(_ORDER_BY_ENTITY_ALIAS);
+				sb.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						sb.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						sb.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						sb.append(ORDER_BY_ASC);
+					}
+					else {
+						sb.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			sb.append(Electrotype_EmployeeModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = sb.toString();
+
+		Query query = session.createQuery(sql);
+
+		query.setFirstResult(0);
+		query.setMaxResults(2);
+
+		QueryPos queryPos = QueryPos.getInstance(query);
+
+		queryPos.add(emp_id);
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						electrotype_Employee)) {
+
+				queryPos.add(orderByConditionValue);
+			}
+		}
+
+		List<Electrotype_Employee> list = query.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the electrotype_ employees where emp_id = &#63; from the database.
+	 *
+	 * @param emp_id the emp_id
+	 */
+	@Override
+	public void removeByEmployeeId(long emp_id) {
+		for (Electrotype_Employee electrotype_Employee :
+				findByEmployeeId(
+					emp_id, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
+			remove(electrotype_Employee);
+		}
+	}
+
+	/**
+	 * Returns the number of electrotype_ employees where emp_id = &#63;.
+	 *
+	 * @param emp_id the emp_id
+	 * @return the number of matching electrotype_ employees
+	 */
+	@Override
+	public int countByEmployeeId(long emp_id) {
+		FinderPath finderPath = _finderPathCountByEmployeeId;
+
+		Object[] finderArgs = new Object[] {emp_id};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler sb = new StringBundler(2);
+
+			sb.append(_SQL_COUNT_ELECTROTYPE_EMPLOYEE_WHERE);
+
+			sb.append(_FINDER_COLUMN_EMPLOYEEID_EMP_ID_2);
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				queryPos.add(emp_id);
+
+				count = (Long)query.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_EMPLOYEEID_EMP_ID_2 =
+		"electrotype_Employee.id.emp_id = ?";
+
 	private FinderPath _finderPathWithPaginationFindByElectronicType;
 	private FinderPath _finderPathWithoutPaginationFindByElectronicType;
 	private FinderPath _finderPathCountByElectronicType;
@@ -1160,6 +1662,23 @@ public class Electrotype_EmployeePersistenceImpl
 		_finderPathCountAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0], new String[0], false);
+
+		_finderPathWithPaginationFindByEmployeeId = _createFinderPath(
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByEmployeeId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			},
+			new String[] {"emp_id"}, true);
+
+		_finderPathWithoutPaginationFindByEmployeeId = _createFinderPath(
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByEmployeeId",
+			new String[] {Long.class.getName()}, new String[] {"emp_id"}, true);
+
+		_finderPathCountByEmployeeId = _createFinderPath(
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEmployeeId",
+			new String[] {Long.class.getName()}, new String[] {"emp_id"},
+			false);
 
 		_finderPathWithPaginationFindByElectronicType = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByElectronicType",

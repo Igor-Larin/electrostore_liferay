@@ -43,6 +43,14 @@ import electrostore.db.service.base.PurchaseLocalServiceBaseImpl;
 )
 public class PurchaseLocalServiceImpl extends PurchaseLocalServiceBaseImpl {
 	
+	public String getGainByCash() {
+		return purchaseFinder.findTheGreatestGainByCash();
+	}
+	
+	public String getElectrotechPurchasesCount() {
+		return purchaseFinder.findElectrotechPurchasesCount();
+	}
+	
 	public List<Purchase> getPurchasesByOrder(int start, int end, String order) {
 		if(order.trim().equals("none"))
 			return purchasePersistence.findAll(start, end);
@@ -73,7 +81,15 @@ public class PurchaseLocalServiceImpl extends PurchaseLocalServiceBaseImpl {
 		purchase.setElectronic_id(electroId);
 		purchase.setEmployee_id(ParamUtil.getLong(request, "employee"));
 		purchase.setPurchasetype_id(ParamUtil.getLong(request, "purchasetype"));
-		purchase.setPurchase_date(ParamUtil.getDate(request, "purchaseDate", new SimpleDateFormat("yyyy-MM-dd HH:mm")));
+		String dateParam = ParamUtil.getString(request, "purchaseDate").replace('T', ' ');
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		try {
+			Date purchaseDate = formatter.parse(dateParam);
+			purchase.setPurchase_date(purchaseDate);
+		}
+		catch(Exception exc) {
+			System.out.println("Ошибка преобразования даты покупки " + exc.getMessage());
+		}		
 		Electronic electronic = electronicPersistence.findByPrimaryKey(electroId);
 		electroCount = electronic.getElectronic_count() - 1;
 		electronic.setIs_archive(!electronic.getIs_present() && electroCount == 0);

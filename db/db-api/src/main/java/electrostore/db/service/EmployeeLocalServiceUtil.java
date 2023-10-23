@@ -88,6 +88,12 @@ public class EmployeeLocalServiceUtil {
 		return getService().createPersistedModel(primaryKeyObj);
 	}
 
+	public static void deleteEmployee(javax.portlet.ActionRequest request)
+		throws PortalException {
+
+		getService().deleteEmployee(request);
+	}
+
 	/**
 	 * Deletes the employee from the database. Also notifies the appropriate model listeners.
 	 *
@@ -218,6 +224,10 @@ public class EmployeeLocalServiceUtil {
 
 	public static List<Employee> getAllEmployees() {
 		return getService().getAllEmployees();
+	}
+
+	public static Employee getBestEmployeeBySmartphonesPurchases() {
+		return getService().getBestEmployeeBySmartphonesPurchases();
 	}
 
 	/**

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+    <sql id="findCashGain">
+    <![CDATA[
+    	select (sum(el.price) / 100) выручка from purchases p
+join purchasetype pt on pt.purchasetype_id = p.purchasetype_id
+join electronics el on p.electronic_id = el.electronic_id
+where pt.name='Наличные'
+    ]]>    
+    </sql>
+    
+    <sql id="findElectrotechPurchasesCount">
+    <![CDATA[
+    	select count(*) from purchases p
+join electronics el on el.electronic_id = p.electronic_id
+join electrotype et on et.electrotype_id = el.electrotype_id
+where et.name='Аудиотехника' and (p.purchase_date >= date_trunc('month', current_timestamp - interval '1 month') and p.purchase_date < date_trunc('month', current_timestamp))
+    ]]>    
+    </sql>
+    <sql id="findBestEmployeeBySmartphonePurchases">
+    <![CDATA[
+    	select em.employee_id, em.name, em.lastname, em.midname, em.birthdate, em.sex, em.position_id from employees em
+join 
+ (select p.employee_id, count(p.employee_id) cnt from purchases p
+where p.electronic_id in (select el.electronic_id from electronics el
+join electrotype et on et.electrotype_id = el.electrotype_id
+where et.name = 'Смартфоны' and el.price <= 1000000)
+group by p.employee_id
+order by cnt desc
+limit 1
+) mx
+on mx.employee_id = em.employee_id
+    ]]>    
+    </sql>
+</custom-sql>

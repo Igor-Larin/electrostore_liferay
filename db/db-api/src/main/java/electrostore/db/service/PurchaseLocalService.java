@@ -204,6 +204,12 @@ public interface PurchaseLocalService
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public String getElectrotechPurchasesCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public String getGainByCash();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**

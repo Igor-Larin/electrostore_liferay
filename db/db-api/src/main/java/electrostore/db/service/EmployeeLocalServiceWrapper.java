@@ -81,6 +81,13 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.createPersistedModel(primaryKeyObj);
 	}
 
+	@Override
+	public void deleteEmployee(javax.portlet.ActionRequest request)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_employeeLocalService.deleteEmployee(request);
+	}
+
 	/**
 	 * Deletes the employee from the database. Also notifies the appropriate model listeners.
 	 *
@@ -232,6 +239,13 @@ public class EmployeeLocalServiceWrapper
 	@Override
 	public java.util.List<electrostore.db.model.Employee> getAllEmployees() {
 		return _employeeLocalService.getAllEmployees();
+	}
+
+	@Override
+	public electrostore.db.model.Employee
+		getBestEmployeeBySmartphonesPurchases() {
+
+		return _employeeLocalService.getBestEmployeeBySmartphonesPurchases();
 	}
 
 	/**

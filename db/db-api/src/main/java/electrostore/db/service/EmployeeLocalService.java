@@ -95,6 +95,8 @@ public interface EmployeeLocalService
 	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	public void deleteEmployee(ActionRequest request) throws PortalException;
+
 	/**
 	 * Deletes the employee from the database. Also notifies the appropriate model listeners.
 	 *
@@ -203,6 +205,9 @@ public interface EmployeeLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Employee> getAllEmployees();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Employee getBestEmployeeBySmartphonesPurchases();
 
 	/**
 	 * Returns the employee with the primary key.

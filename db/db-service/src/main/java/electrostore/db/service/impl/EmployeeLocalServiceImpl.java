@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import electrostore.db.model.Electrotype_Employee;
 import electrostore.db.model.Employee;
 import electrostore.db.service.base.EmployeeLocalServiceBaseImpl;
+import electrostore.db.service.persistence.Electrotype_EmployeePK;
 
 /**
  * @author Brian Wing Shun Chan
@@ -41,13 +42,25 @@ import electrostore.db.service.base.EmployeeLocalServiceBaseImpl;
 )
 public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 	
+	public Employee getBestEmployeeBySmartphonesPurchases() {
+		return employeeFinder.findBestEmployeeBySmartphonePurchases();
+	}
+	
 	public List<Employee> getEmployeesByElectroType(long electroType) {
 		List<Electrotype_Employee> employeesTypes = electrotype_EmployeePersistence.findByElectronicType(electroType);
 		List<Employee> employees = new ArrayList<>();
 		for (Electrotype_Employee emplType : employeesTypes) {
 			employees.add(employeePersistence.fetchByPrimaryKey(emplType.getEmp_id()));
 		}
-		return employees;
+		return employees;	
+	}
+	
+	public void deleteEmployee(ActionRequest request) throws PortalException {
+		long id = ParamUtil.getLong(request, "employeeId");
+		List<Electrotype_Employee> ee = electrotype_EmployeePersistence.findByEmployeeId(id);
+		for(Electrotype_Employee el_em : ee)
+			electrotype_EmployeePersistence.remove(el_em);
+		deleteEmployee(id);
 	}
 	
 	public void addEmployee(ActionRequest request) {
@@ -60,6 +73,11 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 		employee.setMidname(ParamUtil.getString(request, "midname"));		
 		employee.setSex(isFemale);
 		employee.setBirthdate(ParamUtil.getDate(request, "birthdate", new SimpleDateFormat(datePattern)));
+		long[] electrotypes = ParamUtil.getLongValues(request, "electrotypes");
+		for(long electrotype : electrotypes) {
+			Electrotype_Employee ee = electrotype_EmployeePersistence.create(new Electrotype_EmployeePK(id, electrotype));
+			electrotype_EmployeePersistence.update(ee);
+		}
 		employee.setPosition_id(ParamUtil.getLong(request, "position"));
 		employeePersistence.update(employee);
 	}
@@ -109,6 +127,16 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 		employee.setSex(isFemale);
 		employee.setBirthdate(ParamUtil.getDate(request, "birthdate", new SimpleDateFormat(datePattern)));
 		employee.setPosition_id(ParamUtil.getLong(request, "position"));
+		long[] electrotypes = ParamUtil.getLongValues(request, "electrotypes");
+		
+		List<Electrotype_Employee> ees = electrotype_EmployeePersistence.findByEmployeeId(id);
+		for(Electrotype_Employee el_em : ees)
+			electrotype_EmployeePersistence.remove(el_em);
+		
+		for(long electrotype : electrotypes) {
+			Electrotype_Employee ee = electrotype_EmployeePersistence.create(new Electrotype_EmployeePK(id, electrotype));
+			electrotype_EmployeePersistence.update(ee);
+		}
 		employeePersistence.update(employee);
 	}
 	

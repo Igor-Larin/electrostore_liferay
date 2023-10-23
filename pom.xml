@@ -11,6 +11,7 @@
     <module>themes</module>
     <module>db</module>
     <module>web-main</module>
+    <module>web-banner</module>
   </modules>
   <properties>
     <liferay.repository.url>https://repository-cdn.liferay.com/nexus/content/groups/public/</liferay.repository.url>

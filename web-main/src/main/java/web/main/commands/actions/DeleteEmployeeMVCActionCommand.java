@@ -30,12 +30,12 @@ public class DeleteEmployeeMVCActionCommand implements MVCActionCommand {
 	@Override
 	public boolean processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws PortletException {
 	  try {
-		  long id = ParamUtil.getLong(actionRequest, "employeeId");
-		  employeeLocalService.deleteEmployee(id);
+		  employeeLocalService.deleteEmployee(actionRequest);
 		  actionResponse.getRenderParameters().setValue("mvcPath", "/employees/employees.jsp");	
 	  }	  
 	  catch(PortalException exception) {
-		  System.out.println(exception.getMessage()); return true; 
+		  System.out.println("in delete employee " + exception.getMessage()); 
+		  return true; 
 	  }
 	 
 	  return false;

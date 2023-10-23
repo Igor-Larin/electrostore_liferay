@@ -102,8 +102,7 @@ public class Electrotype_EmployeeModelImpl
 	public static final long ELECTRO_ID_COLUMN_BITMASK = 1L;
 
 	/**
-	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
-	 *		#getColumnBitmask(String)}
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
 	 */
 	@Deprecated
 	public static final long EMP_ID_COLUMN_BITMASK = 2L;
@@ -253,6 +252,15 @@ public class Electrotype_EmployeeModelImpl
 		}
 
 		_emp_id = emp_id;
+	}
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *             #getColumnOriginalValue(String)}
+	 */
+	@Deprecated
+	public long getOriginalEmp_id() {
+		return GetterUtil.getLong(this.<Long>getColumnOriginalValue("emp_id"));
 	}
 
 	@Override

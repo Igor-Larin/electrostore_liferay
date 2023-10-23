@@ -224,6 +224,14 @@ public class PurchaseLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static String getElectrotechPurchasesCount() {
+		return getService().getElectrotechPurchasesCount();
+	}
+
+	public static String getGainByCash() {
+		return getService().getGainByCash();
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {

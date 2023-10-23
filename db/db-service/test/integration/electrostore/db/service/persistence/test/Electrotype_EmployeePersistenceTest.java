@@ -141,6 +141,13 @@ public class Electrotype_EmployeePersistenceTest {
 	}
 
 	@Test
+	public void testCountByEmployeeId() throws Exception {
+		_persistence.countByEmployeeId(RandomTestUtil.nextLong());
+
+		_persistence.countByEmployeeId(0L);
+	}
+
+	@Test
 	public void testCountByElectronicType() throws Exception {
 		_persistence.countByElectronicType(RandomTestUtil.nextLong());
 

@@ -14,15 +14,17 @@
 
 package electrostore.db.service.impl;
 
-import com.liferay.portal.aop.AopService;
-import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
-
-import electrostore.db.model.ElectronicType;
-import electrostore.db.service.base.ElectronicTypeLocalServiceBaseImpl;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.osgi.service.component.annotations.Component;
+
+import com.liferay.portal.aop.AopService;
+
+import electrostore.db.model.ElectronicType;
+import electrostore.db.model.Electrotype_Employee;
+import electrostore.db.service.base.ElectronicTypeLocalServiceBaseImpl;
 
 /**
  * @author Brian Wing Shun Chan
@@ -33,6 +35,19 @@ import org.osgi.service.component.annotations.Component;
 )
 public class ElectronicTypeLocalServiceImpl
 	extends ElectronicTypeLocalServiceBaseImpl {
+	
+	public List<Long> getEmployeesElectronicTypes(long employeeId) {
+		
+		List<Electrotype_Employee> ees = electrotype_EmployeePersistence.findByEmployeeId(employeeId);
+		List<Long> etype_ids = new ArrayList<>();
+		try {
+			for(Electrotype_Employee ee : ees)
+				etype_ids.add(ee.getElectro_id());
+		} catch (Exception e) {
+			System.out.println("Ошибка при поиске типов электротовара + " + e.getMessage());
+		}
+		return etype_ids;
+	}
 	
 	public void addElectronicTypeFromZip(String electroTypeString, String delimeter) {
 		long id;

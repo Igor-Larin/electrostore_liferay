@@ -278,6 +278,12 @@ public class ElectronicTypeLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<Long> getEmployeesElectronicTypes(long employeeId) {
+		return _electronicTypeLocalService.getEmployeesElectronicTypes(
+			employeeId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 

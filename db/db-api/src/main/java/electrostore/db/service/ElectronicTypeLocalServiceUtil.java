@@ -254,6 +254,10 @@ public class ElectronicTypeLocalServiceUtil {
 		return getService().getElectronicTypesCount();
 	}
 
+	public static List<Long> getEmployeesElectronicTypes(long employeeId) {
+		return getService().getEmployeesElectronicTypes(employeeId);
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {
