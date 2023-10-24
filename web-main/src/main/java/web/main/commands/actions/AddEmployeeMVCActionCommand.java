@@ -11,6 +11,7 @@ import org.osgi.service.component.annotations.Reference;
 
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import electrostore.db.service.EmployeeLocalService;
@@ -31,12 +32,12 @@ public class AddEmployeeMVCActionCommand implements MVCActionCommand {
 	public boolean processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws PortletException {
 		try {
 			System.out.println("in add employee");
-			employeeLocalService.addEmployee(actionRequest);
-			actionResponse.getRenderParameters().setValue("mvcPath", "/employees/employees.jsp");	
+			employeeLocalService.addEmployee(actionRequest);			
+			actionResponse.getRenderParameters().setValue("mvcPath", "/employees/employees.jsp");			
 		}
 		catch(Exception exception) {
 			return true;
-		}		
+		}
 		return false;
 	}
 }

@@ -1,5 +1,6 @@
 package electrostore.db.service.persistence.impl;
 
+import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.liferay.portal.dao.orm.custom.sql.CustomSQL;
@@ -12,6 +13,7 @@ import electrostore.db.model.Employee;
 import electrostore.db.model.impl.EmployeeImpl;
 import electrostore.db.service.persistence.PositionFinder;
 
+@Component(service = PositionFinder.class)
 public class PositionFinderImpl extends PositionFinderBaseImpl implements PositionFinder{
 	@Reference
 	private CustomSQL customSQL;
@@ -20,7 +22,7 @@ public class PositionFinderImpl extends PositionFinderBaseImpl implements Positi
 		Session session = null;
 		try {
 			session = openSession();
-			String sql = customSQL.get(getClass(), "findBestEmployeesByPositions");		
+			String sql = customSQL.get(getClass(), "findBestEmployeesByPositions");	
 			SQLQuery query = session.createSQLQuery(sql);
 			query.setCacheable(false);
 			query.addEntity("Employee Entity", EmployeeImpl.class);

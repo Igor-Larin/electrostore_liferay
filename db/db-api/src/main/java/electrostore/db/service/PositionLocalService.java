@@ -202,6 +202,9 @@ public interface PositionLocalService
 	public List<Position> getAllPositions();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<String> getBestEmployeesByPositions();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**

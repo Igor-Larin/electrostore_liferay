@@ -217,6 +217,10 @@ public class PositionLocalServiceUtil {
 		return getService().getAllPositions();
 	}
 
+	public static List<String> getBestEmployeesByPositions() {
+		return getService().getBestEmployeesByPositions();
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {

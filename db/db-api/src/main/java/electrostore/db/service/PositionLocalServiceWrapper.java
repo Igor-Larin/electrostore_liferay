@@ -230,6 +230,11 @@ public class PositionLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<String> getBestEmployeesByPositions() {
+		return _positionLocalService.getBestEmployeesByPositions();
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 

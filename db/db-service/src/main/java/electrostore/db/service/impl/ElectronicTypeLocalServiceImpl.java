@@ -56,7 +56,7 @@ public class ElectronicTypeLocalServiceImpl
 			scanner.useDelimiter(delimeter);
 			id = scanner.nextLong();
 			if(electronicTypePersistence.fetchByPrimaryKey(id) != null) {
-				System.out.println("Уже есть такой тип товара");
+				System.out.println("Уже есть такой тип товара id "  + id);
 				return;
 			}
 			name = scanner.next();			

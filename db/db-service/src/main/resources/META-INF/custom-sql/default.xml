@@ -17,6 +17,7 @@ join electrotype et on et.electrotype_id = el.electrotype_id
 where et.name='Аудиотехника' and (p.purchase_date >= date_trunc('month', current_timestamp - interval '1 month') and p.purchase_date < date_trunc('month', current_timestamp))
     ]]>    
     </sql>
+    
     <sql id="findBestEmployeeBySmartphonePurchases">
     <![CDATA[
     	select em.employee_id, em.name, em.lastname, em.midname, em.birthdate, em.sex, em.position_id from employees em
@@ -30,6 +31,20 @@ order by cnt desc
 limit 1
 ) mx
 on mx.employee_id = em.employee_id
+    ]]>    
+    </sql>
+    
+    <sql id="findBestEmployeesByPositions">
+    <![CDATA[
+    	select res.employee_id,  em.name, em.lastname, em.midname, em.birthdate, em.sex, em.position_id from employees em
+join (select p.employee_id, count(e.price) kol from purchases p
+join electronics e on e.electronic_id = p.electronic_id
+group by p.employee_id
+) res on res.employee_id = em.employee_id
+join positiontype pt on pt.id = em.position_id
+where pt.name = ?
+order by res.kol desc
+limit 1
     ]]>    
     </sql>
 </custom-sql>

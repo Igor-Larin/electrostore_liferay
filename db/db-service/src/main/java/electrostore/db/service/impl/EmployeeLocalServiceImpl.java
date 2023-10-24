@@ -92,7 +92,7 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 			scanner.useDelimiter(delimeter);
 			id = scanner.nextLong();
 			if(employeePersistence.fetchByPrimaryKey(id) != null) {
-				System.out.println("Уже есть такой сотрудник");
+				System.out.println("Уже есть такой сотрудник id " + id);
 				return;
 			}
 			lastname = scanner.next();

@@ -79,7 +79,7 @@ public class ElectronicLocalServiceImpl extends ElectronicLocalServiceBaseImpl {
 			scanner.useDelimiter(delimeter);
 			id = scanner.nextLong();
 			if(electronicPersistence.fetchByPrimaryKey(id) != null) {
-				System.out.println("Уже есть такой товар");
+				System.out.println("Уже есть такой товар id " + id);
 				return;
 			}
 			name = scanner.next();

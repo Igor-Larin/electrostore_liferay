@@ -7,6 +7,8 @@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
+<%@page import="electrostore.db.service.PositionLocalServiceUtil"%>
+<%@page import="java.util.List"%>
 <%@page import="electrostore.db.service.EmployeeLocalServiceUtil"%>
 <%@page import="electrostore.db.service.PurchaseLocalServiceUtil"%>
 

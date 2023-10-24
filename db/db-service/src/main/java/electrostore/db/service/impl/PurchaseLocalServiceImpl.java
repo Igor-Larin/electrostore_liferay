@@ -106,7 +106,7 @@ public class PurchaseLocalServiceImpl extends PurchaseLocalServiceBaseImpl {
 			scanner.useDelimiter(delimeter);
 			id = scanner.nextLong();
 			if(purchasePersistence.fetchByPrimaryKey(id) != null) {
-				System.out.println("Уже есть такая покупка");
+				System.out.println("Уже есть такая покупка  id " + id);
 				return;
 			}
 			electro_id = scanner.nextLong();

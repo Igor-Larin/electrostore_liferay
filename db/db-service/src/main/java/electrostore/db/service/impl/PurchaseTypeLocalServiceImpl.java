@@ -41,7 +41,7 @@ public class PurchaseTypeLocalServiceImpl
 			scanner.useDelimiter(delimeter);
 			id = scanner.nextLong();
 			if(purchaseTypePersistence.fetchByPrimaryKey(id) != null) {
-				System.out.println("Уже есть такой тип покупки");
+				System.out.println("Уже есть такой тип покупки id " + id);
 				return;
 			}
 			name = scanner.next();

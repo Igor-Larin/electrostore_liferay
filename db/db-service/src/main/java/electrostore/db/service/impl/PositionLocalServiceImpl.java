@@ -14,6 +14,7 @@
 
 package electrostore.db.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ import org.osgi.service.component.annotations.Component;
 
 import com.liferay.portal.aop.AopService;
 
+import electrostore.db.model.Employee;
 import electrostore.db.model.Position;
 import electrostore.db.model.PurchaseType;
 import electrostore.db.service.base.PositionLocalServiceBaseImpl;
@@ -33,6 +35,21 @@ import electrostore.db.service.base.PositionLocalServiceBaseImpl;
 	service = AopService.class
 )
 public class PositionLocalServiceImpl extends PositionLocalServiceBaseImpl {
+	
+	public List<String> getBestEmployeesByPositions() {
+		System.out.println("in there");
+		List<String> employees = new ArrayList<>();
+		List<Position> positions = positionPersistence.findAll();
+		Employee employee;
+		for(Position pos : positions)
+		{
+			employee = positionFinder.findBestEmployeesByPositions(pos.getName());
+			if(employee != null)
+				employees.add(String.format("Лучший сотрудник в должности %s: %s %s %s", pos.getName(), employee.getLastname(), employee.getName(), employee.getMidname()));
+		}
+		return employees;
+	}
+	
 	public List<Position> getAllPositions() {
 		return positionPersistence.findAll();
 	}
@@ -44,7 +61,7 @@ public class PositionLocalServiceImpl extends PositionLocalServiceBaseImpl {
 			scanner.useDelimiter(delimeter);
 			id = scanner.nextLong();
 			if(positionPersistence.fetchByPrimaryKey(id) != null) {
-				System.out.println("Уже есть такая профессия");
+				System.out.println("Уже есть такая профессия id " + id);
 				return;
 			}
 			name = scanner.next();

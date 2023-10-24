@@ -50,7 +50,7 @@ public class Electrotype_EmployeeLocalServiceImpl
 			electrotype_EmployeePersistence.update(electrotype_Employee);
 		}
 		else {
-			System.out.println("Такая строка уже есть в связующей таблице");
+			System.out.println("Такая строка уже есть в связующей таблице + " + employee_id + " " + electrotype_id);
 		}
 	}
 }

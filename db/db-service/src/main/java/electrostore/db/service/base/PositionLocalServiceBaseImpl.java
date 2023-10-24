@@ -46,6 +46,7 @@ import electrostore.db.service.persistence.ElectronicTypePersistence;
 import electrostore.db.service.persistence.Electrotype_EmployeePersistence;
 import electrostore.db.service.persistence.EmployeeFinder;
 import electrostore.db.service.persistence.EmployeePersistence;
+import electrostore.db.service.persistence.PositionFinder;
 import electrostore.db.service.persistence.PositionPersistence;
 import electrostore.db.service.persistence.PurchaseFinder;
 import electrostore.db.service.persistence.PurchasePersistence;
@@ -464,6 +465,9 @@ public abstract class PositionLocalServiceBaseImpl
 
 	@Reference
 	protected PositionPersistence positionPersistence;
+
+	@Reference
+	protected PositionFinder positionFinder;
 
 	@Reference
 	protected PurchasePersistence purchasePersistence;
