@@ -34,7 +34,7 @@ public class DeleteEmployeeMVCActionCommand implements MVCActionCommand {
 		  actionResponse.getRenderParameters().setValue("mvcPath", "/employees/employees.jsp");	
 	  }	  
 	  catch(PortalException exception) {
-		  System.out.println("in delete employee " + exception.getMessage()); 
+		  System.out.println("Ошибка при удалении сотрудника " + exception.getMessage()); 
 		  return true; 
 	  }
 	 

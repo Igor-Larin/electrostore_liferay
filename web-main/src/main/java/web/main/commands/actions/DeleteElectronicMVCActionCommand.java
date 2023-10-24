@@ -35,7 +35,8 @@ public class DeleteElectronicMVCActionCommand implements MVCActionCommand {
 			actionResponse.getRenderParameters().setValue("mvcPath", "/electronics/electronics.jsp");	
 		}	  
 		catch(PortalException exception) {
-			System.out.println(exception.getMessage()); return true; 
+			System.out.println("Ошибка при удалении товара " + exception.getMessage()); 
+			return true; 
 		}
 		return false;
 	}

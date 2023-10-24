@@ -34,6 +34,7 @@ public class UpdateEmployeeMVCActionCommand implements MVCActionCommand {
 			actionResponse.getRenderParameters().setValue("mvcPath", "/employees/employees.jsp");	
 		}
 		catch(PortalException exception) {
+			System.out.println("Ошибка при обновленнии сотрудника " + exception.getMessage());
 			return true;
 		}
 		return false;

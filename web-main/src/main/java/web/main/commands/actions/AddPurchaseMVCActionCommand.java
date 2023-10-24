@@ -30,7 +30,7 @@ public class AddPurchaseMVCActionCommand implements MVCActionCommand {
 			purchaseLocalService.addPurchase(actionRequest);
 			actionResponse.getRenderParameters().setValue("mvcPath", "/electronics/electronics.jsp");
 		} catch (Exception e) {
-			System.out.println("add purchase exception " + e.getMessage());
+			System.out.println("Ошибка при добавлении продажи " + e.getMessage());
 		}
 		return false;
 	}

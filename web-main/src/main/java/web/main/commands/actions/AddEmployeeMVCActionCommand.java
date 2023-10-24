@@ -36,6 +36,7 @@ public class AddEmployeeMVCActionCommand implements MVCActionCommand {
 			actionResponse.getRenderParameters().setValue("mvcPath", "/employees/employees.jsp");			
 		}
 		catch(Exception exception) {
+			System.out.println("Ошибка при добавлении сотрудника " + exception.getMessage());
 			return true;
 		}
 		return false;

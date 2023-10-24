@@ -36,6 +36,7 @@ public class AddElectronicMVCActionCommand implements MVCActionCommand {
 		}
 		catch(Exception exception) {
 			//SessionErrors.add(actionRequest, exception.getClass().getName());
+			System.out.println("Ошибка при добавлении товара " + exception.getMessage());
 			return true;
 		}		
 		return false;

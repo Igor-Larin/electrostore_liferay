@@ -34,7 +34,7 @@ public class UpdateElectronicMVCActionCommand implements MVCActionCommand {
 			actionResponse.getRenderParameters().setValue("mvcPath", "/electronics/electronics.jsp");	
 		}
 		catch(Exception exception) {
-			System.out.println("in update electronic " + exception.getMessage());
+			System.out.println("Ошибка при обновлении товара " + exception.getMessage());
 			return true;
 		}
 		return false;
